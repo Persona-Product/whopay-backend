@@ -22,11 +22,13 @@ type Query {
 
 type Mutation {
   addBook(newBook: InputBookDto!): Book!
+  updateBook(newBook: InputBookDto!): Book!
   removeBook(id: Int!): Boolean!
 }
 
 input InputBookDto {
+  id: ID!
   title: String!
   price: Int
-  author: [String!]!
+  author: String!
 }
