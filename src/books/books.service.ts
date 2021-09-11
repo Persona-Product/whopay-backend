@@ -22,16 +22,19 @@ export class BooksService {
     return this.booksRepostiory.findOne(id);
   }
 
-  // ✨ レコード追加・更新
+  // 🧩 レコード追加
   async create(data: InputBookDto): Promise<Book> {
     const book = this.booksRepostiory.create(data);
     await this.booksRepostiory.save(book);
     return book;
   }
 
-  // ✨ レコード追加・更新
-  async update(data: InputBookDto): Promise<Book> {
-    const book = this.booksRepostiory.create(data);
+  // ✨ レコード更新
+  async update(id: number, data: InputBookDto): Promise<Book> {
+    const book = await this.booksRepostiory.findOne(id);
+    book.title = data.title;
+    book.price = data.price;
+    book.author = data.author;
     await this.booksRepostiory.save(book);
     return book;
   }

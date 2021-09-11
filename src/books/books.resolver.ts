@@ -29,16 +29,19 @@ export class BooksResolver {
     return book;
   }
 
-  // ✨ レコード追加
+  // 🧩　レコード追加
   @Mutation((returns) => Book) // このクエリーはBookを返す
   addBook(@Args('newBook') newBook: InputBookDto): Promise<Book> {
     return this.booksService.create(newBook);
   }
 
-  // ✨ レコード追加
+  // ✨ レコード更新
   @Mutation((returns) => Book) // このクエリーはBookを返す
-  updateBook(@Args('newBook') newBook: InputBookDto): Promise<Book> {
-    return this.booksService.update(newBook);
+  updateBook(
+    @Args('id') id: number,
+    @Args('newBook') newBook: InputBookDto,
+  ): Promise<Book> {
+    return this.booksService.update(id, newBook);
   }
 
   // 🔥 レコード削除

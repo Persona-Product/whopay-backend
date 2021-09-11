@@ -1,14 +1,10 @@
-import { Field, ID, InputType, Int } from '@nestjs/graphql';
+import { Field, InputType, Int } from '@nestjs/graphql';
 import { Max, MaxLength, Min } from 'class-validator';
 
 // 外部に依存性させる
 @InputType()
 // Dto作成
 export class InputBookDto {
-  @Field((type) => ID)
-  @MaxLength(30) // 最大文字列数
-  id?: number; // field名
-
   @Field()
   @MaxLength(30) // 最大文字列数
   title: string; // field名
