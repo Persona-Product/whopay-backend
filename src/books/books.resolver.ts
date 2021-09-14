@@ -1,6 +1,6 @@
 import { NotFoundException } from '@nestjs/common';
 import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { Book } from './book';
+import { Book } from './entity/book.entity';
 import { BooksService } from './books.service';
 import { InputBookDto } from './dto/InputBook.dto';
 

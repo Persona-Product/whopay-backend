@@ -1,4 +1,4 @@
-import { Book } from './book';
+import { Book } from './entity/book.entity';
 
 describe('Book', () => {
   it('should be defined', () => {
