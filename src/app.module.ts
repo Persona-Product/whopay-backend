@@ -3,8 +3,9 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { BooksModule } from './books/books.module';
+import { BooksModule } from './modules/books/books.module';
 import { TypeOrmConfigService } from './config/typeorm-config.service';
+import { UsersModule } from './modules/users/users.module';
 
 @Module({
   imports: [
@@ -31,6 +32,8 @@ import { TypeOrmConfigService } from './config/typeorm-config.service';
 
     // （BooksModuleはAppModuleに依存する）
     BooksModule,
+
+    UsersModule,
   ],
   controllers: [],
   providers: [],
