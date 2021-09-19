@@ -1,34 +1,37 @@
-import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 import {
   Entity,
   Column,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   CreateDateColumn,
+  BaseEntity,
 } from 'typeorm';
 
 @Entity()
 @ObjectType()
-export class User {
-  @PrimaryGeneratedColumn()
-  @Field((type) => ID)
-  id: number;
-
-  @Column({ length: '30' })
+export class User extends BaseEntity {
+  @PrimaryColumn()
   @Field()
-  title: string;
+  userId: string;
 
   @Column()
-  // fieldが配列の場合 → RDBでは正規化を行うので配列は使わない
-  // FirebaseなどのドキュメントベースのDBなどで使う
-  // @Field((type) => [String])
   @Field()
-  author: string;
+  userName: string;
 
-  @Column({ type: 'int', unsigned: true })
-  @Field((type) => Int)
-  price: number;
+  @Column()
+  @Field()
+  profileBody: string;
+
+  @Column()
+  @Field()
+  iconId: string;
 
   @CreateDateColumn()
   @Field()
   createdAt: Date;
 }
+
+// @Fieldが配列の場合
+// @Field((type) => [String])
+// → RDBでは正規化を行うので配列は使わない
+// → FirebaseなどのドキュメントベースのDBなどで使う
