@@ -2,11 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Book {
-  id: ID!
-  title: String!
-  author: String!
-  price: Int!
+type User {
+  userId: String!
+  userName: String!
+  profileBody: String!
+  iconId: String!
   createdAt: DateTime!
 }
 
@@ -16,18 +16,19 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type Query {
-  books: [Book!]!
-  getBook(id: Int!): Book!
+  getAllUser: [User!]!
+  getOneUser(userId: String!): User!
 }
 
 type Mutation {
-  addBook(newBook: InputBookDto!): Book!
-  updateBook(newBook: InputBookDto!, id: Float!): Book!
-  removeBook(id: Int!): Boolean!
+  createUser(userDto: InputUserDto!): User!
+  updateUser(userDto: InputUserDto!, userId: String!): User!
+  deleteUser(userId: String!): Boolean!
 }
 
-input InputBookDto {
-  title: String!
-  price: Int
-  author: String!
+input InputUserDto {
+  userId: String!
+  userName: String!
+  profileBody: String!
+  iconId: String!
 }
