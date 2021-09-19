@@ -2,7 +2,8 @@ import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { NotFoundException } from '@nestjs/common';
 import { User } from './entity/user.entity';
 import { UsersService } from './users.service';
-import { InputUserDto } from './dto/input-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Resolver((of) => User)
 export class UsersResolver {
@@ -29,17 +30,17 @@ export class UsersResolver {
 
   // 🧩　レコード追加
   @Mutation((returns) => User)
-  createUser(@Args('userDto') userDto: InputUserDto): Promise<User> {
-    return this.usersService.createUser(userDto);
+  createUser(@Args('userDto') createUserDto: CreateUserDto): Promise<User> {
+    return this.usersService.createUser(createUserDto);
   }
 
   // ✨ レコード更新
   @Mutation((returns) => User)
   updateUser(
     @Args('userId') userId: string,
-    @Args('userDto') userDto: InputUserDto,
+    @Args('userDto') updateUserDto: UpdateUserDto,
   ): Promise<User> {
-    return this.usersService.updateUser(userId, userDto);
+    return this.usersService.updateUser(userId, updateUserDto);
   }
 
   // 🔥 レコード削除

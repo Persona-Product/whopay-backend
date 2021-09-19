@@ -2,7 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entity/user.entity';
-import { InputUserDto } from './dto/input-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 // 外部に依存性させる
 @Injectable()
@@ -23,18 +24,21 @@ export class UsersService {
   }
 
   // 🧩 レコード追加
-  async createUser(userDto: InputUserDto): Promise<User> {
-    const user = this.usersRepostiory.create(userDto);
+  async createUser(createUserDto: CreateUserDto): Promise<User> {
+    const user = this.usersRepostiory.create(createUserDto);
     await this.usersRepostiory.save(user);
     return user;
   }
 
   // ✨ レコード更新
-  async updateUser(userId: string, userDto: InputUserDto): Promise<User> {
+  async updateUser(
+    userId: string,
+    updateUserDto: UpdateUserDto,
+  ): Promise<User> {
     const user = await this.getOneUser(userId);
-    user.userName = userDto.userName;
-    user.profileBody = userDto.profileBody;
-    user.iconId = userDto.iconId;
+    user.userName = updateUserDto.userName;
+    user.profileBody = updateUserDto.profileBody;
+    user.iconId = updateUserDto.iconId;
     await this.usersRepostiory.save(user);
     return user;
   }
