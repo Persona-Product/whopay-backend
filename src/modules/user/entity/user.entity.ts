@@ -7,7 +7,7 @@ import {
   BaseEntity,
 } from 'typeorm';
 
-@Entity()
+@Entity('user')
 @ObjectType()
 export class User extends BaseEntity {
   @PrimaryColumn()

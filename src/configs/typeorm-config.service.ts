@@ -18,7 +18,6 @@ export class TypeOrmConfigService implements TypeOrmOptionsFactory {
       synchronize: this.strToBoolean(
         configService.get<string>('DATABASE_SYNC', 'false'),
       ),
-
       // herokuデプロイ時に必要
       // ssl:
       //   process.env.NODE_ENV === 'production'

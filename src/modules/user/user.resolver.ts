@@ -1,26 +1,26 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { NotFoundException } from '@nestjs/common';
-import { User } from './entity/user.entity';
-import { UsersService } from './users.service';
-import { CreateUserDto } from './dto/create-user.dto';
-import { UpdateUserDto } from './dto/update-user.dto';
+import { User } from '@/modules/user/entity/user.entity';
+import { UserService } from '@/modules/user/user.service';
+import { CreateUserDto } from '@/modules/user/dto/create-user.dto';
+import { UpdateUserDto } from '@/modules/user/dto/update-user.dto';
 
 @Resolver((of) => User)
-export class UsersResolver {
+export class UserResolver {
   // 利用する Service が inject される
-  // （UsersServiceはUsersResolverに依存する）
-  constructor(private usersService: UsersService) {}
+  // （UserServiceはUserResolverに依存する）
+  constructor(private userService: UserService) {}
 
   // 👨‍👩‍👧‍👦 全レコード取得
   @Query((returns) => [User])
   getAllUser(): Promise<User[]> {
-    return this.usersService.getAllUser();
+    return this.userService.getAllUser();
   }
 
   // 💁‍♂️ 単レコード取得
   @Query((returns) => User)
   getOneUser(@Args({ name: 'userId', type: () => String }) userId: string) {
-    const book = this.usersService.getOneUser(userId);
+    const book = this.userService.getOneUser(userId);
     // レコードが見つからなかったら404
     if (!book) {
       throw new NotFoundException(userId);
@@ -31,7 +31,7 @@ export class UsersResolver {
   // 🧩　レコード追加
   @Mutation((returns) => User)
   createUser(@Args('userDto') createUserDto: CreateUserDto): Promise<User> {
-    return this.usersService.createUser(createUserDto);
+    return this.userService.createUser(createUserDto);
   }
 
   // ✨ レコード更新
@@ -40,13 +40,13 @@ export class UsersResolver {
     @Args('userId') userId: string,
     @Args('userDto') updateUserDto: UpdateUserDto,
   ): Promise<User> {
-    return this.usersService.updateUser(userId, updateUserDto);
+    return this.userService.updateUser(userId, updateUserDto);
   }
 
   // 🔥 レコード削除
   @Mutation((returns) => Boolean)
   deleteUser(@Args({ name: 'userId', type: () => String }) userId: string) {
-    return this.usersService.deleteUser(userId);
+    return this.userService.deleteUser(userId);
   }
 }
 

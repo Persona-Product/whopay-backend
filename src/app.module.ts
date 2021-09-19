@@ -3,8 +3,11 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TypeOrmConfigService } from './config/typeorm-config.service';
-import { UsersModule } from './modules/users/users.module';
+import { UserModule } from '@/modules/user/user.module';
+import { LikeModule } from '@/modules/like/like.module';
+import { FollowModule } from '@/modules/follow/follows.module';
+import { TweetModule } from '@/modules/tweet/tweet.module';
+import { TypeOrmConfigService } from '@/configs/typeorm-config.service';
 
 @Module({
   imports: [
@@ -31,9 +34,12 @@ import { UsersModule } from './modules/users/users.module';
     }),
 
     // これらのModuleはAppModuleに依存する
-    UsersModule,
+    UserModule,
+    TweetModule,
+    LikeModule,
+    FollowModule,
   ],
-  controllers: [],
   providers: [],
+  controllers: [],
 })
 export class AppModule {}

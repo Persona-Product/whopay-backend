@@ -10,6 +10,13 @@
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "@/user/*": ["src/module/user/*"],
+      "@/tweet/*": ["src/module/tweet/*"],
+      "@/follow/*": ["src/module/follow/*"],
+      "@/like/*": ["src/module/like/*"]
+    },
     "incremental": true,
     "skipLibCheck": true,
     "strictNullChecks": false,
