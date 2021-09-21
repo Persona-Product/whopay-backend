@@ -3,6 +3,7 @@
 # ------------------------------------------------------
 
 type User {
+  id: String!
   userId: String!
   userName: String!
   profileBody: String!
@@ -27,7 +28,7 @@ type Mutation {
 }
 
 input CreateUserDto {
-  userId: String!
+  id: String!
   userName: String!
   profileBody: String!
   iconId: String!
