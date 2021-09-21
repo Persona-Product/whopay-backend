@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { TweetResolver } from '@/modules/tweet/tweet.resolver';
+import { TweetResolver } from '@/tweet/tweet.resolver';
 
 describe('TweetResolver', () => {
   let resolver: TweetResolver;

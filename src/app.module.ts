@@ -3,10 +3,12 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModule } from '@/modules/user/user.module';
-import { LikeModule } from '@/modules/like/like.module';
-import { FollowModule } from '@/modules/follow/follows.module';
-import { TweetModule } from '@/modules/tweet/tweet.module';
+import { UserModule } from '@/user/user.module';
+import { TweetModule } from '@/tweet/tweet.module';
+import { RetweetModule } from '@/retweet/retweet.module';
+import { CommentModule } from '@/comment/comment.module';
+import { LikeModule } from '@/like/like.module';
+import { FollowModule } from '@/follow/follows.module';
 import { TypeOrmConfigService } from '@/configs/typeorm-config.service';
 
 @Module({
@@ -36,6 +38,8 @@ import { TypeOrmConfigService } from '@/configs/typeorm-config.service';
     // これらのModuleはAppModuleに依存する
     UserModule,
     TweetModule,
+    RetweetModule,
+    CommentModule,
     LikeModule,
     FollowModule,
   ],

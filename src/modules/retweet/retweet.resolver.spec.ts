@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { LikeResolver } from '@/like/like.resolver';
+import { RetweetResolver } from '@/retweet/retweet.resolver';
 
-describe('LikeResolver', () => {
-  let resolver: LikeResolver;
+describe('RetweetResolver', () => {
+  let resolver: RetweetResolver;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [LikeResolver],
+      providers: [RetweetResolver],
     }).compile();
 
-    resolver = module.get<LikeResolver>(LikeResolver);
+    resolver = module.get<RetweetResolver>(RetweetResolver);
   });
 
   it('should be defined', () => {

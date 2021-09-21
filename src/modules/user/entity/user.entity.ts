@@ -1,16 +1,21 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import {
   Entity,
-  Column,
-  PrimaryColumn,
-  CreateDateColumn,
   BaseEntity,
+  Column,
+  // PrimaryColumn,
+  CreateDateColumn,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 
 @Entity('user')
 @ObjectType()
 export class User extends BaseEntity {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('uuid')
+  @Field()
+  id: string;
+
+  @Column()
   @Field()
   userId: string;
 
@@ -18,11 +23,11 @@ export class User extends BaseEntity {
   @Field()
   userName: string;
 
-  @Column()
+  @Column({ nullable: true })
   @Field()
   profileBody: string;
 
-  @Column()
+  @Column({ nullable: true })
   @Field()
   iconId: string;
 

@@ -8,9 +8,9 @@ import {
   // PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity('tweet')
+@Entity('retweet')
 @ObjectType()
-export class Tweet extends BaseEntity {
+export class Retweet extends BaseEntity {
   @PrimaryColumn()
   @Field()
   id: string;

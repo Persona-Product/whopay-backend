@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from '@/modules/user/entity/user.entity';
-import { CreateUserDto } from '@/modules/user/dto/create-user.dto';
-import { UpdateUserDto } from '@/modules/user/dto/update-user.dto';
+import { User } from '@/user/entity/user.entity';
+import { CreateUserDto } from '@/user/dto/create-user.dto';
+import { UpdateUserDto } from '@/user/dto/update-user.dto';
 
 // 外部に依存性させる
 @Injectable()

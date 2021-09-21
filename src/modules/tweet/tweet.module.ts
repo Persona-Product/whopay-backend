@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TweetResolver } from '@/modules/tweet/tweet.resolver';
-import { TweetService } from '@/modules/tweet/tweet.service';
-import { Tweet } from './entity/tweet.entity';
+import { TweetResolver } from '@/tweet/tweet.resolver';
+import { TweetService } from '@/tweet/tweet.service';
+import { Tweet } from '@/tweet/entity/tweet.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Tweet])],

@@ -1,10 +1,11 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import {
   Entity,
+  BaseEntity,
   Column,
   PrimaryColumn,
   CreateDateColumn,
-  BaseEntity,
+  // PrimaryGeneratedColumn,
 } from 'typeorm';
 
 @Entity('like')
@@ -12,5 +13,13 @@ import {
 export class Like extends BaseEntity {
   @PrimaryColumn()
   @Field()
-  likeId: string;
+  id: string;
+
+  @Column()
+  @Field()
+  body: string;
+
+  @CreateDateColumn()
+  @Field()
+  createdAt: Date;
 }

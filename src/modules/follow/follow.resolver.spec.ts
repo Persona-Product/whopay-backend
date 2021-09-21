@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { FollowResolver } from '@/modules/follow/follow.resolver';
+import { FollowResolver } from '@/follow/follow.resolver';
 
 describe('FollowResolver', () => {
   let resolver: FollowResolver;
