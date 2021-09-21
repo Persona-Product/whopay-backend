@@ -1,0 +1,1 @@
+create database twitter_clone;
