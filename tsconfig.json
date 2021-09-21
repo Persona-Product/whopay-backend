@@ -12,10 +12,12 @@
     "baseUrl": "./",
     "paths": {
       "@/*": ["src/*"],
-      "@/user/*": ["src/module/user/*"],
-      "@/tweet/*": ["src/module/tweet/*"],
-      "@/follow/*": ["src/module/follow/*"],
-      "@/like/*": ["src/module/like/*"]
+      "@/user/*": ["src/modules/user/*"],
+      "@/tweet/*": ["src/modules/tweet/*"],
+      "@/retweet/*": ["src/modules/retweet/*"],
+      "@/comment/*": ["src/modules/comment/*"],
+      "@/follow/*": ["src/modules/follow/*"],
+      "@/like/*": ["src/modules/like/*"]
     },
     "incremental": true,
     "skipLibCheck": true,
