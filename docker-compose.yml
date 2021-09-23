@@ -39,6 +39,10 @@ services:
     # コンテナ作成時の名前
     container_name: nest-graphql-api
 
+    volumes:
+      # ホストとコンテナのファイル同期
+      - .:/app
+
     # 起動順を制御
     depends_on:
       # postgresが起動してからこのコンテナを起動
