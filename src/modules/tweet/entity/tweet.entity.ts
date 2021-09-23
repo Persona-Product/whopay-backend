@@ -17,7 +17,11 @@ export class Tweet extends BaseEntity {
 
   @Column()
   @Field()
-  body: string;
+  userId: string;
+
+  @Column()
+  @Field()
+  tweetBody: string;
 
   @CreateDateColumn()
   @Field()

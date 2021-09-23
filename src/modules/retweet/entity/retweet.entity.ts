@@ -17,7 +17,11 @@ export class Retweet extends BaseEntity {
 
   @Column()
   @Field()
-  body: string;
+  userId: string;
+
+  @Column()
+  @Field()
+  tweetId: string;
 
   @CreateDateColumn()
   @Field()

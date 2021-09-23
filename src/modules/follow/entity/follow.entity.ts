@@ -17,7 +17,11 @@ export class Follow extends BaseEntity {
 
   @Column()
   @Field()
-  body: string;
+  userId: string;
+
+  @Column()
+  @Field()
+  followingUserId: string;
 
   @CreateDateColumn()
   @Field()

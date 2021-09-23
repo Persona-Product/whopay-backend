@@ -17,7 +17,15 @@ export class Comment extends BaseEntity {
 
   @Column()
   @Field()
-  body: string;
+  userId: string;
+
+  @Column()
+  @Field()
+  tweetId: string;
+
+  @Column()
+  @Field()
+  commentBody: string;
 
   @CreateDateColumn()
   @Field()
