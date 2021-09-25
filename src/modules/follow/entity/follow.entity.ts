@@ -2,26 +2,27 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import {
   Entity,
   BaseEntity,
-  Column,
-  PrimaryColumn,
   CreateDateColumn,
-  // PrimaryGeneratedColumn,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
+import { User } from '@/user/entity/user.entity';
 
 @Entity('follow')
 @ObjectType()
 export class Follow extends BaseEntity {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('uuid')
   @Field()
   id: string;
 
-  @Column()
-  @Field()
-  userId: string;
+  @ManyToOne((type) => User, (user) => user.follows)
+  @JoinColumn({ name: 'userId' })
+  userId: User;
 
-  @Column()
-  @Field()
-  followingUserId: string;
+  @ManyToOne((type) => User, (user) => user.follows)
+  @JoinColumn({ name: 'followingUserId' })
+  followingUserId: User;
 
   @CreateDateColumn()
   @Field()
