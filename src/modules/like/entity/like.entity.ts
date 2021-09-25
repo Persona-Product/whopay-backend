@@ -2,26 +2,28 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import {
   Entity,
   BaseEntity,
-  Column,
-  PrimaryColumn,
   CreateDateColumn,
-  // PrimaryGeneratedColumn,
+  PrimaryGeneratedColumn,
+  JoinColumn,
+  ManyToOne,
 } from 'typeorm';
+import { User } from '@/user/entity/user.entity';
+import { Tweet } from '@/tweet/entity/tweet.entity';
 
 @Entity('like')
 @ObjectType()
 export class Like extends BaseEntity {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('uuid')
   @Field()
   id: string;
 
-  @Column()
-  @Field()
-  userId: string;
+  @ManyToOne((type) => User, (user) => user.likes)
+  @JoinColumn({ name: 'userId' })
+  userId: User;
 
-  @Column()
-  @Field()
-  tweetId: string;
+  @ManyToOne((type) => Tweet, (tweet) => tweet.likes)
+  @JoinColumn({ name: 'tweetId' })
+  tweetId: Tweet;
 
   @CreateDateColumn()
   @Field()
