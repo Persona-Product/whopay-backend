@@ -3,25 +3,28 @@ import {
   Entity,
   BaseEntity,
   Column,
-  PrimaryColumn,
   CreateDateColumn,
-  // PrimaryGeneratedColumn,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
+import { User } from '@/user/entity/user.entity';
+import { Tweet } from '@/tweet/entity/tweet.entity';
 
 @Entity('comment')
 @ObjectType()
 export class Comment extends BaseEntity {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('uuid')
   @Field()
   id: string;
 
-  @Column()
-  @Field()
-  userId: string;
+  @ManyToOne((type) => User, (user) => user.likes)
+  @JoinColumn({ name: 'userId' })
+  userId: User;
 
-  @Column()
-  @Field()
-  tweetId: string;
+  @ManyToOne((type) => Tweet, (tweet) => tweet.comments)
+  @JoinColumn({ name: 'tweetId' })
+  tweetId: Tweet;
 
   @Column()
   @Field()
