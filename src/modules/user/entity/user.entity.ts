@@ -3,10 +3,15 @@ import {
   Entity,
   BaseEntity,
   Column,
-  // PrimaryColumn,
   CreateDateColumn,
   PrimaryGeneratedColumn,
+  OneToMany,
 } from 'typeorm';
+import { Tweet } from '@/tweet/entity/tweet.entity';
+import { Retweet } from '@/retweet/entity/retweet.entity';
+import { Like } from '@/like/entity/like.entity';
+import { Comment } from '@/comment/entity/comment.entity';
+import { Follow } from '@/follow/entity/follow.entity';
 
 @Entity('user')
 @ObjectType()
@@ -34,6 +39,21 @@ export class User extends BaseEntity {
   @CreateDateColumn()
   @Field()
   createdAt: Date;
+
+  @OneToMany((type) => Tweet, (tweet) => tweet.userId)
+  tweets: Tweet[];
+
+  @OneToMany((type) => Retweet, (retweet) => retweet.userId)
+  retweets: Retweet[];
+
+  @OneToMany((type) => Like, (like) => like.userId)
+  likes: Like[];
+
+  @OneToMany((type) => Comment, (comment) => comment.userId)
+  comments: Comment[];
+
+  @OneToMany((type) => Follow, (follow) => follow.userId)
+  follows: Follow[];
 }
 
 // @Fieldが配列の場合
