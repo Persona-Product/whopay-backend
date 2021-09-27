@@ -13,24 +13,24 @@ export class UserService {
     private userRepostiory: Repository<User>,
   ) {}
 
-  // 👨‍👩‍👧‍👦 全レコード取得
+  // get all user
   async getAllUser(): Promise<User[]> {
-    return this.userRepostiory.find();
+    return await this.userRepostiory.find();
   }
 
-  // 💁‍♂️ 単レコード取得
+  // get user
   async getOneUser(userId: string): Promise<User> {
-    return this.userRepostiory.findOne(userId);
+    return await this.userRepostiory.findOne(userId);
   }
 
-  // 🧩 レコード追加
+  // create user
   async createUser(createUserDto: CreateUserDto): Promise<User> {
-    const user = this.userRepostiory.create(createUserDto);
+    const user = await this.userRepostiory.create(createUserDto);
     await this.userRepostiory.save(user);
     return user;
   }
 
-  // ✨ レコード更新
+  // update user
   async updateUser(
     userId: string,
     updateUserDto: UpdateUserDto,
@@ -43,7 +43,7 @@ export class UserService {
     return user;
   }
 
-  // 🔥 レコード削除
+  // delete user
   async deleteUser(userId: string): Promise<boolean> {
     const result = await this.userRepostiory.delete(userId);
     return result.affected > 0;
