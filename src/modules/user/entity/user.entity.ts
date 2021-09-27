@@ -4,7 +4,7 @@ import {
   BaseEntity,
   Column,
   CreateDateColumn,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   OneToMany,
 } from 'typeorm';
 import { Tweet } from '@/tweet/entity/tweet.entity';
@@ -13,16 +13,12 @@ import { Like } from '@/like/entity/like.entity';
 import { Comment } from '@/comment/entity/comment.entity';
 import { Follow } from '@/follow/entity/follow.entity';
 
-@Entity('user')
+@Entity('users')
 @ObjectType()
 export class User extends BaseEntity {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn()
   @Field()
   id: string;
-
-  @Column()
-  @Field()
-  userId: string;
 
   @Column()
   @Field()
@@ -41,6 +37,7 @@ export class User extends BaseEntity {
   createdAt: Date;
 
   @OneToMany((type) => Tweet, (tweet) => tweet.userId)
+  @Field(() => [Tweet])
   tweets: Tweet[];
 
   @OneToMany((type) => Retweet, (retweet) => retweet.userId)

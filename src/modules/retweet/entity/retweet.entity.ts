@@ -6,26 +6,35 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   JoinColumn,
+  Column,
 } from 'typeorm';
 import { User } from '@/user/entity/user.entity';
 import { Tweet } from '@/tweet/entity/tweet.entity';
 
-@Entity('retweet')
+@Entity('retweets')
 @ObjectType()
 export class Retweet extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   @Field()
   id: string;
 
-  @ManyToOne((type) => User, (user) => user.tweets)
-  @JoinColumn({ name: 'userId' })
-  userId: User;
+  @Column()
+  @Field()
+  userId: string;
 
-  @ManyToOne((type) => Tweet, (tweet) => tweet.likes)
-  @JoinColumn({ name: 'tweetId' })
-  tweetId: Tweet;
+  @Column()
+  @Field()
+  tweetId: string;
 
   @CreateDateColumn()
   @Field()
   createdAt: Date;
+
+  @ManyToOne((type) => User, (user) => user.tweets)
+  @JoinColumn({ name: 'userId' })
+  user: User;
+
+  @ManyToOne((type) => Tweet, (tweet) => tweet.likes)
+  @JoinColumn({ name: 'tweetId' })
+  tweet: Tweet;
 }

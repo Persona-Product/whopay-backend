@@ -6,25 +6,34 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   JoinColumn,
+  Column,
 } from 'typeorm';
 import { User } from '@/user/entity/user.entity';
 
-@Entity('follow')
+@Entity('follows')
 @ObjectType()
 export class Follow extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   @Field()
   id: string;
 
-  @ManyToOne((type) => User, (user) => user.follows)
-  @JoinColumn({ name: 'userId' })
-  userId: User;
+  @Column()
+  @Field()
+  userId: string;
 
-  @ManyToOne((type) => User, (user) => user.follows)
-  @JoinColumn({ name: 'followingUserId' })
-  followingUserId: User;
+  @Column()
+  @Field()
+  followingUserId: string;
 
   @CreateDateColumn()
   @Field()
   createdAt: Date;
+
+  @ManyToOne((type) => User, (user) => user.follows)
+  @JoinColumn({ name: 'userId' })
+  user: User;
+
+  @ManyToOne((type) => User, (user) => user.follows)
+  @JoinColumn({ name: 'followingUserId' })
+  followingUser: User;
 }

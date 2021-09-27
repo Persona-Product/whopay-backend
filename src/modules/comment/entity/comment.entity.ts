@@ -11,20 +11,20 @@ import {
 import { User } from '@/user/entity/user.entity';
 import { Tweet } from '@/tweet/entity/tweet.entity';
 
-@Entity('comment')
+@Entity('comments')
 @ObjectType()
 export class Comment extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   @Field()
   id: string;
 
-  @ManyToOne((type) => User, (user) => user.likes)
-  @JoinColumn({ name: 'userId' })
-  userId: User;
+  @Column()
+  @Field()
+  userId: string;
 
-  @ManyToOne((type) => Tweet, (tweet) => tweet.comments)
-  @JoinColumn({ name: 'tweetId' })
-  tweetId: Tweet;
+  @Column()
+  @Field()
+  tweetId: string;
 
   @Column()
   @Field()
@@ -33,4 +33,12 @@ export class Comment extends BaseEntity {
   @CreateDateColumn()
   @Field()
   createdAt: Date;
+
+  @ManyToOne((type) => User, (user) => user.likes)
+  @JoinColumn({ name: 'userId' })
+  user: User;
+
+  @ManyToOne((type) => Tweet, (tweet) => tweet.comments)
+  @JoinColumn({ name: 'tweetId' })
+  tweet: Tweet;
 }

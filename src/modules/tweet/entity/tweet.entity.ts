@@ -14,16 +14,16 @@ import { Retweet } from '@/retweet/entity/retweet.entity';
 import { Like } from '@/like/entity/like.entity';
 import { Comment } from '@/comment/entity/comment.entity';
 
-@Entity('tweet')
+@Entity('tweets')
 @ObjectType()
 export class Tweet extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   @Field()
   id: string;
 
-  @ManyToOne((type) => User, (user) => user.tweets)
-  @JoinColumn({ name: 'userId' })
-  userId: User;
+  @Column()
+  @Field((type) => User)
+  userId: string;
 
   @Column()
   @Field()
@@ -32,6 +32,10 @@ export class Tweet extends BaseEntity {
   @CreateDateColumn()
   @Field()
   createdAt: Date;
+
+  @ManyToOne((type) => User, (user) => user.tweets)
+  @JoinColumn({ name: 'userId' })
+  user: User;
 
   @OneToMany((type) => Retweet, (retweet) => retweet.tweetId)
   retweets: Retweet[];
