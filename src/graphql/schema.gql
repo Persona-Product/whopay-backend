@@ -2,10 +2,10 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Tweet {
-  id: String!
-  userId: User!
-  tweetBody: String!
+type Like {
+  id: Int!
+  userId: String!
+  tweetId: Int!
   createdAt: DateTime!
 }
 
@@ -14,30 +14,40 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type Tweet {
+  id: Int!
+  userId: String!
+  tweetBody: String!
+  createdAt: DateTime!
+  GetTweetLike: [Like!]!
+}
+
 type User {
   id: String!
   userName: String!
   profileBody: String!
   iconId: String!
   createdAt: DateTime!
-  tweets: [Tweet!]!
-  getUserTweet: [Tweet!]!
+  GetUserTweet: [Tweet!]!
+  GetUserLike: [Like!]!
 }
 
 type Query {
-  getAllUser: [User!]!
-  getOneUser(userId: String!): User!
-  getAllTweet: [Tweet!]!
-  getUserTweet(userId: String!): [Tweet!]!
-  getOneTweet(tweetId: String!): Tweet!
+  GetAllUser: [User!]!
+  GetOneUser(id: String!): User!
+  GetAllTweet: [Tweet!]!
+  GetOneTweet(id: Int!): Tweet!
+  GetAllLike: [Like!]!
 }
 
 type Mutation {
-  createUser(userDto: CreateUserDto!): User!
-  updateUser(userDto: UpdateUserDto!, userId: String!): User!
-  deleteUser(userId: String!): Boolean!
-  createTweet(tweetDto: CreateTweetDto!): Tweet!
-  deleteTweet(tweetId: String!): Boolean!
+  CreateUser(userDto: CreateUserDto!): User!
+  UpdateUser(userDto: UpdateUserDto!, id: String!): User!
+  DeleteUser(id: String!): Boolean!
+  CreateTweet(tweetDto: CreateTweetDto!): Tweet!
+  DeleteTweet(id: Int!): Boolean!
+  CreateLike(likeDto: CreateLikeDto!): Like!
+  DeleteLike(id: Int!): Boolean!
 }
 
 input CreateUserDto {
@@ -56,4 +66,9 @@ input UpdateUserDto {
 input CreateTweetDto {
   userId: String!
   tweetBody: String!
+}
+
+input CreateLikeDto {
+  userId: String!
+  tweetId: Float!
 }
