@@ -11,13 +11,13 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "paths": {
-      "@/*": ["src/*"],
-      "@/user/*": ["src/modules/user/*"],
-      "@/tweet/*": ["src/modules/tweet/*"],
-      "@/retweet/*": ["src/modules/retweet/*"],
-      "@/comment/*": ["src/modules/comment/*"],
-      "@/follow/*": ["src/modules/follow/*"],
-      "@/like/*": ["src/modules/like/*"]
+      "@src/*": ["src/*"],
+      "@user/*": ["src/module/user/*"],
+      "@tweet/*": ["src/module/tweet/*"],
+      "@retweet/*": ["src/module/retweet/*"],
+      "@comment/*": ["src/module/comment/*"],
+      "@follow/*": ["src/module/follow/*"],
+      "@like/*": ["src/module/like/*"]
     },
     "incremental": true,
     "skipLibCheck": true,
