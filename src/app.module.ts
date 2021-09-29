@@ -3,13 +3,13 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { UserModule } from '@/user/user.module';
-import { TweetModule } from '@/tweet/tweet.module';
-import { RetweetModule } from '@/retweet/retweet.module';
-import { CommentModule } from '@/comment/comment.module';
-import { LikeModule } from '@/like/like.module';
-import { FollowModule } from '@/follow/follows.module';
-import { TypeOrmConfigService } from '@/configs/typeorm-config.service';
+import { UserModule } from '@user/user.module';
+import { TweetModule } from '@tweet/tweet.module';
+import { RetweetModule } from '@retweet/retweet.module';
+import { CommentModule } from '@comment/comment.module';
+import { LikeModule } from '@like/like.module';
+import { FollowModule } from '@follow/follows.module';
+import { TypeOrmConfigService } from '@src/config/typeorm-config.service';
 
 @Module({
   imports: [
