@@ -9,10 +9,7 @@ import {
   PrimaryGeneratedColumn,
   OneToMany,
 } from 'typeorm';
-import { User } from './user.entity';
-import { Retweet } from './retweet.entity';
-import { Like } from './like.entity';
-import { Comment } from './comment.entity';
+import { User, Retweet, Like, Comment } from '@src/entity';
 
 @Entity('tweets')
 @ObjectType()

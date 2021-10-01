@@ -8,8 +8,7 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { User } from './user.entity';
-import { Tweet } from './tweet.entity';
+import { User, Tweet } from '@src/entity';
 
 @Entity('comments')
 @ObjectType()

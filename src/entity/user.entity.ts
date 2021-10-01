@@ -7,11 +7,7 @@ import {
   PrimaryColumn,
   OneToMany,
 } from 'typeorm';
-import { Tweet } from './tweet.entity';
-import { Retweet } from './retweet.entity';
-import { Like } from './like.entity';
-import { Comment } from './comment.entity';
-import { Follow } from './follow.entity';
+import { Tweet, Retweet, Like, Comment, Follow } from '@src/entity';
 
 @Entity('users')
 @ObjectType()
