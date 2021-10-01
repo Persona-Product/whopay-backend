@@ -2,11 +2,16 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Like {
-  id: Int!
-  userId: String!
-  tweetId: Int!
+type User {
+  id: String!
+  userName: String!
+  profileBody: String!
+  iconId: String!
   createdAt: DateTime!
+  GetUserTweet: [Tweet!]!
+  GetUserReTweet: [Tweet!]!
+  GetUserLike: [Like!]!
+  GetUserComment: [Comment!]!
 }
 
 """
@@ -19,17 +24,43 @@ type Tweet {
   userId: String!
   tweetBody: String!
   createdAt: DateTime!
+  getTweetRetweet: [Retweet!]!
   GetTweetLike: [Like!]!
+  GetLikeCount: Count!
+  GetTweetComment: [Comment!]!
 }
 
-type User {
-  id: String!
-  userName: String!
-  profileBody: String!
-  iconId: String!
+type Retweet {
+  id: Int!
+  userId: String!
+  tweetId: Int!
   createdAt: DateTime!
-  GetUserTweet: [Tweet!]!
-  GetUserLike: [Like!]!
+}
+
+type Like {
+  id: Int!
+  userId: String!
+  tweetId: Int!
+  createdAt: DateTime!
+}
+
+type Comment {
+  id: Int!
+  userId: String!
+  tweetId: Int!
+  commentBody: String!
+  createdAt: DateTime!
+}
+
+type Follow {
+  id: Int!
+  userId: String!
+  followingUserId: String!
+  createdAt: DateTime!
+}
+
+type Count {
+  count: String!
 }
 
 type Query {
@@ -37,7 +68,11 @@ type Query {
   GetOneUser(id: String!): User!
   GetAllTweet: [Tweet!]!
   GetOneTweet(id: Int!): Tweet!
+  GetAllRetweet: [Retweet!]!
   GetAllLike: [Like!]!
+  GetAllComment: [Comment!]!
+  GetOneComment(id: Int!): Comment!
+  GetAllFollow: [Follow!]!
 }
 
 type Mutation {
@@ -46,8 +81,14 @@ type Mutation {
   DeleteUser(id: String!): Boolean!
   CreateTweet(tweetDto: CreateTweetDto!): Tweet!
   DeleteTweet(id: Int!): Boolean!
+  CreateRetweet(retweetDto: CreateRetweetDto!): Retweet!
+  DeleteRetweet(id: Int!): Boolean!
   CreateLike(likeDto: CreateLikeDto!): Like!
   DeleteLike(id: Int!): Boolean!
+  CreateComment(tweetDto: CreateCommentDto!): Comment!
+  DeleteComment(id: Int!): Boolean!
+  CreateFollow(followDto: CreateFollowDto!): Follow!
+  DeleteFollow(id: Int!): Boolean!
 }
 
 input CreateUserDto {
@@ -68,7 +109,23 @@ input CreateTweetDto {
   tweetBody: String!
 }
 
+input CreateRetweetDto {
+  userId: String!
+  tweetId: Float!
+}
+
 input CreateLikeDto {
   userId: String!
   tweetId: Float!
+}
+
+input CreateCommentDto {
+  userId: String!
+  tweetId: Float!
+  commentBody: String!
+}
+
+input CreateFollowDto {
+  userId: String!
+  followingUserId: String!
 }
