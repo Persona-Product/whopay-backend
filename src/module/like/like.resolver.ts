@@ -3,7 +3,7 @@ import { Like } from '@src/entity';
 import { LikeService } from '@like/like.service';
 import { CreateLikeDto } from '@like/dto/create-like.dto';
 
-@Resolver()
+@Resolver((of) => Like)
 export class LikeResolver {
   constructor(private likeService: LikeService) {}
 
