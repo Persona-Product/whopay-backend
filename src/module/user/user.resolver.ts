@@ -7,12 +7,14 @@ import {
   Parent,
 } from '@nestjs/graphql';
 import { NotFoundException } from '@nestjs/common';
-import { User, Tweet, Like } from '@src/entity';
+import { User, Tweet, Like, Comment } from '@src/entity';
 import { UserService } from '@user/user.service';
 import { CreateUserDto } from '@user/dto/create-user.dto';
 import { UpdateUserDto } from '@user/dto/update-user.dto';
 import { TweetService } from '@tweet/tweet.service';
+import { RetweetService } from '@retweet/retweet.service';
 import { LikeService } from '@like/like.service';
+import { CommentService } from '@comment/comment.service';
 
 @Resolver((of) => User)
 export class UserResolver {
@@ -21,7 +23,9 @@ export class UserResolver {
   constructor(
     private userService: UserService,
     private tweetService: TweetService,
+    private retweetService: RetweetService,
     private likeService: LikeService,
+    private commentService: CommentService,
   ) {}
 
   // get all user
@@ -35,9 +39,7 @@ export class UserResolver {
   GetOneUser(@Args({ name: 'id', type: () => String }) id: string) {
     const user = this.userService.getOneUser(id);
     // レコードが見つからなかったら404
-    if (!user) {
-      throw new NotFoundException(id);
-    }
+    if (!user) throw new NotFoundException(id);
     return user;
   }
 
@@ -47,10 +49,22 @@ export class UserResolver {
     return this.tweetService.getUserTweet(id);
   }
 
+  @ResolveField(() => [Tweet])
+  GetUserReTweet(@Parent() user: User) {
+    const { id } = user;
+    return this.retweetService.getUserRetweet(id);
+  }
+
   @ResolveField(() => [Like])
   GetUserLike(@Parent() user: User) {
     const { id } = user;
     return this.likeService.getUserLike(id);
+  }
+
+  @ResolveField(() => [Comment])
+  GetUserComment(@Parent() user: User) {
+    const { id } = user;
+    return this.commentService.getUserComment(id);
   }
 
   // create user
