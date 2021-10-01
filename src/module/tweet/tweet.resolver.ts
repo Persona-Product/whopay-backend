@@ -8,16 +8,21 @@ import {
   Resolver,
 } from '@nestjs/graphql';
 import { NotFoundException } from '@nestjs/common';
-import { Tweet, Like } from '@src/entity';
+import { Tweet, Retweet, Like, Comment } from '@src/entity';
+import { Count } from '@src/class';
 import { TweetService } from '@tweet/tweet.service';
 import { CreateTweetDto } from '@tweet/dto/create-tweet.dto';
+import { RetweetService } from '@retweet/retweet.service';
 import { LikeService } from '@like/like.service';
+import { CommentService } from '@comment/comment.service';
 
 @Resolver((of) => Tweet)
 export class TweetResolver {
   constructor(
     private tweetService: TweetService,
+    private retweetService: RetweetService,
     private likeService: LikeService,
+    private commentService: CommentService,
   ) {}
 
   // get all user, all tweet
@@ -30,16 +35,32 @@ export class TweetResolver {
   @Query((returns) => Tweet)
   GetOneTweet(@Args({ name: 'id', type: () => Int }) id: number) {
     const tweet = this.tweetService.getOneTweet(id);
-    if (!tweet) {
-      throw new NotFoundException(id);
-    }
+    if (!tweet) throw new NotFoundException(id);
     return tweet;
+  }
+
+  @ResolveField(() => [Retweet])
+  getTweetRetweet(@Parent() tweet: Tweet) {
+    const { id } = tweet;
+    return this.retweetService.getTweetRetweet(id);
   }
 
   @ResolveField(() => [Like])
   GetTweetLike(@Parent() tweet: Tweet) {
     const { id } = tweet;
     return this.likeService.getTweetLike(id);
+  }
+
+  @ResolveField(() => Count!)
+  GetLikeCount(@Parent() tweet: Tweet) {
+    const { id } = tweet;
+    return this.likeService.getLikeCount(id);
+  }
+
+  @ResolveField(() => [Comment])
+  GetTweetComment(@Parent() tweet: Tweet) {
+    const { id } = tweet;
+    return this.commentService.getTweetComment(id);
   }
 
   // create tweet
