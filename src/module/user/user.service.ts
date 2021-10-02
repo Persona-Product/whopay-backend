@@ -5,7 +5,6 @@ import { User } from '@src/entity';
 import { CreateUserDto } from '@user/dto/create-user.dto';
 import { UpdateUserDto } from '@user/dto/update-user.dto';
 
-// 外部に依存性させる
 @Injectable()
 export class UserService {
   constructor(
