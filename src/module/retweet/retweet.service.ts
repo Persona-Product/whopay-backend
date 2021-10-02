@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Retweet } from '@src/entity';
+import { Count } from '@src/class';
 import { CreateRetweetDto } from '@retweet/dto/create-retweet.dto';
 
 @Injectable()
@@ -29,6 +30,18 @@ export class RetweetService {
     return await this.retweetRepostiory.find({
       tweetId: id,
     });
+  }
+
+  // get retweet count
+  async getRetweetCount(id: number): Promise<Count> {
+    const db = this.retweetRepostiory.createQueryBuilder('retweets');
+    const query = db
+      .select('count(retweets.tweetId)')
+      .where('retweets.tweetId = :tweetId', { tweetId: id })
+      .groupBy('retweets.tweetId');
+    const result = await query.getRawOne();
+    if (!result) return { count: '0' };
+    return result;
   }
 
   // create retweet
