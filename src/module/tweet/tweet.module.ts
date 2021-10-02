@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Tweet, Like, Retweet, Comment } from '@src/entity';
+import { Tweet, Retweet, Like, Comment } from '@src/entity';
 import { TweetResolver } from '@tweet/tweet.resolver';
 import { TweetService } from '@tweet/tweet.service';
 import { RetweetResolver } from '@retweet/retweet.resolver';
