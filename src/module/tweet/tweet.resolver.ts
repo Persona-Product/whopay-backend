@@ -9,12 +9,13 @@ import {
 } from '@nestjs/graphql';
 import { NotFoundException } from '@nestjs/common';
 import { Tweet, Retweet, Like, Comment } from '@src/entity';
-import { Count } from '@src/class';
+import { Count } from '@common/count/count';
 import { TweetService } from '@tweet/tweet.service';
 import { CreateTweetDto } from '@tweet/dto/create-tweet.dto';
 import { RetweetService } from '@retweet/retweet.service';
 import { LikeService } from '@like/like.service';
 import { CommentService } from '@comment/comment.service';
+import { CountService } from '@common/count/count.service';
 
 @Resolver((of) => Tweet)
 export class TweetResolver {
@@ -23,6 +24,7 @@ export class TweetResolver {
     private retweetService: RetweetService,
     private likeService: LikeService,
     private commentService: CommentService,
+    private countService: CountService,
   ) {}
 
   // get tweets by users
@@ -37,6 +39,18 @@ export class TweetResolver {
     const tweet = this.tweetService.getTweet(id);
     if (!tweet) throw new NotFoundException(id);
     return tweet;
+  }
+
+  // create tweet
+  @Mutation((returns) => Tweet)
+  CreateTweet(@Args('tweetDto') createTweetDto: CreateTweetDto) {
+    return this.tweetService.createTweet(createTweetDto);
+  }
+
+  // // delete tweet
+  @Mutation((returns) => Boolean)
+  DeleteTweet(@Args({ name: 'id', type: () => Int }) id: number) {
+    return this.tweetService.deleteTweet(id);
   }
 
   // get retweets on this tweet
@@ -64,32 +78,20 @@ export class TweetResolver {
   @ResolveField(() => Count)
   GetLikeCount(@Parent() tweet: Tweet) {
     const { id } = tweet;
-    return this.likeService.getLikeCount(id);
+    return this.countService.getLikeCount(id);
   }
 
   // get retweet count on this tweet
   @ResolveField(() => Count)
   GetRetweetCount(@Parent() tweet: Tweet) {
     const { id } = tweet;
-    return this.retweetService.getRetweetCount(id);
+    return this.countService.getRetweetCount(id);
   }
 
   // get comment count on this tweet
   @ResolveField(() => Count)
   GetCommentCount(@Parent() tweet: Tweet) {
     const { id } = tweet;
-    return this.commentService.getCommentCount(id);
-  }
-
-  // create tweet
-  @Mutation((returns) => Tweet)
-  CreateTweet(@Args('tweetDto') createTweetDto: CreateTweetDto) {
-    return this.tweetService.createTweet(createTweetDto);
-  }
-
-  // // delete tweet
-  @Mutation((returns) => Boolean)
-  DeleteTweet(@Args({ name: 'id', type: () => Int }) id: number) {
-    return this.tweetService.deleteTweet(id);
+    return this.countService.getCommentCount(id);
   }
 }

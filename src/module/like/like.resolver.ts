@@ -1,17 +1,35 @@
-import { Args, Int, Mutation, Query, Resolver } from '@nestjs/graphql';
-import { Like } from '@src/entity';
+import {
+  Args,
+  Int,
+  Mutation,
+  Parent,
+  Query,
+  ResolveField,
+  Resolver,
+} from '@nestjs/graphql';
+import { Like, User } from '@src/entity';
 import { LikeService } from '@like/like.service';
 import { CreateLikeDto } from '@like/dto/create-like.dto';
+// import { UserService } from '@user/user.service';
 
 @Resolver((of) => Like)
 export class LikeResolver {
-  constructor(private likeService: LikeService) {}
+  constructor(
+    private likeService: LikeService, // private userService: UserService,
+  ) {}
 
   // get likes
   @Query((returns) => [Like])
   GetLikes() {
     return this.likeService.getLikes();
   }
+
+  // get user by user
+  // @ResolveField(() => [User])
+  // GetRetweetsByUser(@Parent() like: Like) {
+  //   const { userId } = like;
+  //   return this.userService.getUser(userId);
+  // }
 
   // create like
   @Mutation((returns) => Like)

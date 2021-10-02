@@ -3,20 +3,18 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Tweet, Retweet, Like, Comment } from '@src/entity';
 import { TweetResolver } from '@tweet/tweet.resolver';
 import { TweetService } from '@tweet/tweet.service';
-import { RetweetService } from '@retweet/retweet.service';
-import { LikeService } from '@like/like.service';
-import { CommentService } from '@comment/comment.service';
+import { RetweetModule } from '@retweet/retweet.module';
+import { LikeModule } from '@like/like.module';
+import { CommentModule } from '@comment/comment.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Tweet, Retweet, Like, Comment])],
-  providers: [
-    TweetResolver,
-    TweetService,
-    RetweetService,
-    LikeService,
-    CommentService,
+  imports: [
+    TypeOrmModule.forFeature([Tweet, Retweet, Like, Comment]),
+    RetweetModule,
+    LikeModule,
+    CommentModule,
   ],
-  controllers: [],
-  exports: [],
+  providers: [TweetResolver, TweetService],
+  exports: [TweetService],
 })
 export class TweetModule {}

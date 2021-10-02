@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Like } from '@src/entity';
-import { Count } from '@src/class';
 import { CreateLikeDto } from '@like/dto/create-like.dto';
 
 @Injectable()
@@ -35,18 +34,6 @@ export class LikeService {
     return await this.likeRepostiory.find({
       tweetId: id,
     });
-  }
-
-  // get like count on tweet
-  async getLikeCount(id: number): Promise<Count> {
-    const db = this.likeRepostiory.createQueryBuilder('likes');
-    const query = db
-      .select('count(likes.tweetId)')
-      .where('likes.tweetId = :tweetId', { tweetId: id })
-      .groupBy('likes.tweetId');
-    const result = await query.getRawOne();
-    if (!result) return { count: '0' };
-    return result;
   }
 
   // create like

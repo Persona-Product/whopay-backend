@@ -3,27 +3,23 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User, Tweet, Like, Retweet, Comment, Follow } from '@src/entity';
 import { UserResolver } from '@user/user.resolver';
 import { UserService } from '@user/user.service';
-import { TweetService } from '@tweet/tweet.service';
-import { RetweetService } from '@retweet/retweet.service';
-import { LikeService } from '@like/like.service';
-import { CommentService } from '@comment/comment.service';
-import { FollowService } from '@follow/follow.service';
+import { TweetModule } from '@tweet/tweet.module';
+import { RetweetModule } from '@retweet/retweet.module';
+import { LikeModule } from '@like/like.module';
+import { CommentModule } from '@comment/comment.module';
+import { FollowModule } from '@follow/follow.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([User, Tweet, Retweet, Like, Comment, Follow]),
+    TweetModule,
+    RetweetModule,
+    LikeModule,
+    CommentModule,
+    FollowModule,
   ],
-  providers: [
-    UserResolver,
-    UserService,
-    TweetService,
-    RetweetService,
-    LikeService,
-    CommentService,
-    FollowService,
-  ],
-  controllers: [],
-  exports: [],
+  providers: [UserResolver, UserService],
+  exports: [UserService],
 })
 export class UserModule {}
 

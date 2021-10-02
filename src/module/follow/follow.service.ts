@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Follow } from '@src/entity';
-import { Count } from '@src/class';
 import { CreateFollowDto } from '@follow/dto/create-follow.dto';
 
 @Injectable()
@@ -35,32 +34,6 @@ export class FollowService {
     return await this.followRepostiory.find({
       userId: id,
     });
-  }
-
-  // get following count on user
-  async getFollowingCount(id: string): Promise<Count> {
-    const db = this.followRepostiory.createQueryBuilder('follows');
-    const query = db
-      .select('count(follows.userId)')
-      .where('follows.userId = :userId', { userId: id })
-      .groupBy('follows.userId');
-    const result = await query.getRawOne();
-    if (!result) return { count: '0' };
-    return result;
-  }
-
-  // get follow count on user
-  async getFollowerCount(id: string): Promise<Count> {
-    const db = this.followRepostiory.createQueryBuilder('follows');
-    const query = db
-      .select('count(follows.followingUserId)')
-      .where('follows.followingUserId = :followingUserId', {
-        followingUserId: id,
-      })
-      .groupBy('follows.followingUserId');
-    const result = await query.getRawOne();
-    if (!result) return { count: '0' };
-    return result;
   }
 
   // create follow

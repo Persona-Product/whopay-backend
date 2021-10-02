@@ -7,7 +7,6 @@ import { RetweetService } from '@retweet/retweet.service';
 @Module({
   imports: [TypeOrmModule.forFeature([Retweet])],
   providers: [RetweetResolver, RetweetService],
-  controllers: [],
-  exports: [],
+  exports: [RetweetService],
 })
 export class RetweetModule {}
