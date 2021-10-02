@@ -32,14 +32,16 @@ export class LikeService {
     });
   }
 
-  // get tweet
+  // get like count
   async getLikeCount(id: number): Promise<Count> {
     const db = this.likeRepostiory.createQueryBuilder('likes');
     const query = db
       .select('count(likes.tweetId)')
       .where('likes.tweetId = :tweetId', { tweetId: id })
       .groupBy('likes.tweetId');
-    return await query.getRawOne();
+    const result = await query.getRawOne();
+    if (!result) return { count: '0' };
+    return result;
   }
 
   // create like
