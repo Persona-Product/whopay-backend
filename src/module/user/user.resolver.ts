@@ -15,6 +15,7 @@ import { TweetService } from '@tweet/tweet.service';
 import { RetweetService } from '@retweet/retweet.service';
 import { LikeService } from '@like/like.service';
 import { CommentService } from '@comment/comment.service';
+import { FollowService } from '@follow/follow.service';
 
 @Resolver((of) => User)
 export class UserResolver {
@@ -26,45 +27,63 @@ export class UserResolver {
     private retweetService: RetweetService,
     private likeService: LikeService,
     private commentService: CommentService,
+    private followeService: FollowService,
   ) {}
 
-  // get all user
+  // get users
   @Query((returns) => [User])
-  GetAllUser() {
-    return this.userService.getAllUser();
+  GetUsers() {
+    return this.userService.getUsers();
   }
 
   // get user
   @Query((returns) => User)
-  GetOneUser(@Args({ name: 'id', type: () => String }) id: string) {
-    const user = this.userService.getOneUser(id);
-    // レコードが見つからなかったら404
+  GetUser(@Args({ name: 'id', type: () => String }) id: string) {
+    const user = this.userService.getUser(id);
     if (!user) throw new NotFoundException(id);
     return user;
   }
 
+  // get tweets by user
   @ResolveField(() => [Tweet])
-  GetUserTweet(@Parent() user: User) {
+  GetTweetsByUser(@Parent() user: User) {
     const { id } = user;
-    return this.tweetService.getUserTweet(id);
+    return this.tweetService.getTweetsByUser(id);
   }
 
+  // get retweets by user
   @ResolveField(() => [Tweet])
-  GetUserReTweet(@Parent() user: User) {
+  GetRetweetsByUser(@Parent() user: User) {
     const { id } = user;
-    return this.retweetService.getUserRetweet(id);
+    return this.retweetService.getRetweetsByUser(id);
   }
 
+  // get likes by user
   @ResolveField(() => [Like])
-  GetUserLike(@Parent() user: User) {
+  GetLikesByUser(@Parent() user: User) {
     const { id } = user;
-    return this.likeService.getUserLike(id);
+    return this.likeService.getLikesByUser(id);
   }
 
+  // get comments by user
   @ResolveField(() => [Comment])
-  GetUserComment(@Parent() user: User) {
+  GetCommentsByUser(@Parent() user: User) {
     const { id } = user;
-    return this.commentService.getUserComment(id);
+    return this.commentService.getCommentsByUser(id);
+  }
+
+  // get folowing count on user
+  @ResolveField(() => [Comment])
+  GetFollowingCount(@Parent() user: User) {
+    const { id } = user;
+    return this.followeService.getFollowingCount(id);
+  }
+
+  // get folower count on user
+  @ResolveField(() => [Comment])
+  GetFollowerCount(@Parent() user: User) {
+    const { id } = user;
+    return this.followeService.getFollowerCount(id);
   }
 
   // create user

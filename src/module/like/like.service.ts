@@ -12,27 +12,32 @@ export class LikeService {
     private likeRepostiory: Repository<Like>,
   ) {}
 
-  // get all user, all like
-  async getAllLike(): Promise<Like[]> {
+  // get like
+  async getLike(id: number): Promise<Like> {
+    return await this.likeRepostiory.findOne(id);
+  }
+
+  // get likes
+  async getLikes(): Promise<Like[]> {
     const data = await this.likeRepostiory.find();
     return data;
   }
 
-  // get tweet
-  async getUserLike(id: string): Promise<Like[]> {
+  // get likes by user
+  async getLikesByUser(id: string): Promise<Like[]> {
     return await this.likeRepostiory.find({
       userId: id,
     });
   }
 
-  // get tweet
-  async getTweetLike(id: number): Promise<Like[]> {
+  // get likes by tweet
+  async getLikesByTweet(id: number): Promise<Like[]> {
     return await this.likeRepostiory.find({
       tweetId: id,
     });
   }
 
-  // get like count
+  // get like count on tweet
   async getLikeCount(id: number): Promise<Count> {
     const db = this.likeRepostiory.createQueryBuilder('likes');
     const query = db

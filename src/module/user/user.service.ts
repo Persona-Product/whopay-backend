@@ -12,13 +12,13 @@ export class UserService {
     private userRepostiory: Repository<User>,
   ) {}
 
-  // get all user
-  async getAllUser(): Promise<User[]> {
+  // get users
+  async getUsers(): Promise<User[]> {
     return await this.userRepostiory.find();
   }
 
   // get user
-  async getOneUser(id: string): Promise<User> {
+  async getUser(id: string): Promise<User> {
     return await this.userRepostiory.findOne(id);
   }
 
@@ -31,7 +31,7 @@ export class UserService {
 
   // update user
   async updateUser(id: string, updateUserDto: UpdateUserDto): Promise<User> {
-    const user = await this.getOneUser(id);
+    const user = await this.getUser(id);
     user.userName = updateUserDto.userName;
     user.profileBody = updateUserDto.profileBody;
     user.iconId = updateUserDto.iconId;

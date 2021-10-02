@@ -7,10 +7,10 @@ import { CreateFollowDto } from '@follow/dto/create-follow.dto';
 export class FollowResolver {
   constructor(private followService: FollowService) {}
 
-  // get all user, all follow
+  // get follows
   @Query((returns) => [Follow])
-  GetAllFollow() {
-    return this.followService.getAllFollow();
+  GetFollows() {
+    return this.followService.getFollows();
   }
 
   // create follow

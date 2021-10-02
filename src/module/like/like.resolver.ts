@@ -7,10 +7,10 @@ import { CreateLikeDto } from '@like/dto/create-like.dto';
 export class LikeResolver {
   constructor(private likeService: LikeService) {}
 
-  // get all user, all like
+  // get likes
   @Query((returns) => [Like])
-  GetAllLike() {
-    return this.likeService.getAllLike();
+  GetLikes() {
+    return this.likeService.getLikes();
   }
 
   // create like

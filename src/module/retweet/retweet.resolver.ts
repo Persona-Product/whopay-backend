@@ -7,10 +7,10 @@ import { CreateRetweetDto } from '@retweet/dto/create-retweet.dto';
 export class RetweetResolver {
   constructor(private retweetService: RetweetService) {}
 
-  // get all user, all retweet
+  // get retweets
   @Query((returns) => [Retweet])
-  GetAllRetweet() {
-    return this.retweetService.getAllRetweet();
+  GetRetweets() {
+    return this.retweetService.getRetweets();
   }
 
   // create retweet

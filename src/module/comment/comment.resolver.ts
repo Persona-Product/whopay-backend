@@ -8,27 +8,27 @@ import { CreateCommentDto } from '@comment/dto/create-comment.dto';
 export class CommentResolver {
   constructor(private commentService: CommentService) {}
 
-  // get all user, all tweet
+  // get comments
   @Query((returns) => [Comment])
-  GetAllComment() {
-    return this.commentService.getAllComment();
+  GetComments() {
+    return this.commentService.getComments();
   }
 
-  // get tweet
+  // get comment
   @Query((returns) => Comment)
-  GetOneComment(@Args({ name: 'id', type: () => Int }) id: number) {
-    const tweet = this.commentService.getOneComment(id);
+  GetComment(@Args({ name: 'id', type: () => Int }) id: number) {
+    const tweet = this.commentService.getComment(id);
     if (!tweet) throw new NotFoundException(id);
     return tweet;
   }
 
-  // create tweet
+  // create comment
   @Mutation((returns) => Comment)
   CreateComment(@Args('tweetDto') createCommentDto: CreateCommentDto) {
     return this.commentService.createComment(createCommentDto);
   }
 
-  // // delete tweet
+  // // delete comment
   @Mutation((returns) => Boolean)
   DeleteComment(@Args({ name: 'id', type: () => Int }) id: number) {
     return this.commentService.deleteComment(id);

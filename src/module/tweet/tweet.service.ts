@@ -11,19 +11,19 @@ export class TweetService {
     private tweetRepostiory: Repository<Tweet>,
   ) {}
 
-  // get all user, all tweet
-  async getAllTweet(): Promise<Tweet[]> {
+  // get tweet
+  async getTweet(id: number): Promise<Tweet> {
+    return await this.tweetRepostiory.findOne(id);
+  }
+
+  // get tweets
+  async getTweets(): Promise<Tweet[]> {
     const data = await this.tweetRepostiory.find();
     return data;
   }
 
-  // get user, all tweet
-  async getOneTweet(id: number): Promise<Tweet> {
-    return await this.tweetRepostiory.findOne(id);
-  }
-
-  // get tweet
-  async getUserTweet(id: string): Promise<Tweet[]> {
+  // get tweets by user
+  async getTweetsByUser(id: string): Promise<Tweet[]> {
     return await this.tweetRepostiory.find({
       userId: id,
     });

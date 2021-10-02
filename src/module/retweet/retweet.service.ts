@@ -12,27 +12,32 @@ export class RetweetService {
     private retweetRepostiory: Repository<Retweet>,
   ) {}
 
-  // get all user, all retweet
-  async getAllRetweet(): Promise<Retweet[]> {
+  // get retweet
+  async getRetweet(id: number): Promise<Retweet> {
+    return await this.retweetRepostiory.findOne(id);
+  }
+
+  // get retweets
+  async getRetweets(): Promise<Retweet[]> {
     const data = await this.retweetRepostiory.find();
     return data;
   }
 
-  // get tweet
-  async getUserRetweet(id: string): Promise<Retweet[]> {
+  // get retweets by user
+  async getRetweetsByUser(id: string): Promise<Retweet[]> {
     return await this.retweetRepostiory.find({
       userId: id,
     });
   }
 
-  // get tweet
-  async getTweetRetweet(id: number): Promise<Retweet[]> {
+  // get retweets by tweet
+  async getRetweetsByTweet(id: number): Promise<Retweet[]> {
     return await this.retweetRepostiory.find({
       tweetId: id,
     });
   }
 
-  // get retweet count
+  // get retweet count on tweet
   async getRetweetCount(id: number): Promise<Count> {
     const db = this.retweetRepostiory.createQueryBuilder('retweets');
     const query = db

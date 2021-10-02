@@ -12,32 +12,32 @@ export class CommentService {
     private commentRepostiory: Repository<Comment>,
   ) {}
 
-  // get all user, all comment
-  async getAllComment(): Promise<Comment[]> {
+  // get comment
+  async getComment(id: number): Promise<Comment> {
+    return await this.commentRepostiory.findOne(id);
+  }
+
+  // get comments
+  async getComments(): Promise<Comment[]> {
     const data = await this.commentRepostiory.find();
     return data;
   }
 
-  // get user, all comment
-  async getOneComment(id: number): Promise<Comment> {
-    return await this.commentRepostiory.findOne(id);
-  }
-
-  // get comment
-  async getUserComment(id: string): Promise<Comment[]> {
+  // get comments by user
+  async getCommentsByUser(id: string): Promise<Comment[]> {
     return await this.commentRepostiory.find({
       userId: id,
     });
   }
 
-  // get comment
-  async getTweetComment(id: number): Promise<Comment[]> {
+  // get comments by tweet
+  async getCommentsByTweet(id: number): Promise<Comment[]> {
     return await this.commentRepostiory.find({
       tweetId: id,
     });
   }
 
-  // get like count
+  // get like count on tweet
   async getCommentCount(id: number): Promise<Count> {
     const db = this.commentRepostiory.createQueryBuilder('comments');
     const query = db

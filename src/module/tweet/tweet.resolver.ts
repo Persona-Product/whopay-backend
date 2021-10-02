@@ -25,53 +25,56 @@ export class TweetResolver {
     private commentService: CommentService,
   ) {}
 
-  // get all user, all tweet
+  // get tweets by users
   @Query((returns) => [Tweet])
-  GetAllTweet() {
-    return this.tweetService.getAllTweet();
+  GetTweets() {
+    return this.tweetService.getTweets();
   }
 
-  // get tweet
+  // get tweet by user
   @Query((returns) => Tweet)
-  GetOneTweet(@Args({ name: 'id', type: () => Int }) id: number) {
-    const tweet = this.tweetService.getOneTweet(id);
+  GetTweet(@Args({ name: 'id', type: () => Int }) id: number) {
+    const tweet = this.tweetService.getTweet(id);
     if (!tweet) throw new NotFoundException(id);
     return tweet;
   }
 
+  // get retweets on this tweet
   @ResolveField(() => [Retweet])
-  GetTweetRetweet(@Parent() tweet: Tweet) {
+  GetRetweetsByTweet(@Parent() tweet: Tweet) {
     const { id } = tweet;
-    return this.retweetService.getTweetRetweet(id);
+    return this.retweetService.getRetweetsByTweet(id);
   }
 
+  // get likes on this tweet
   @ResolveField(() => [Like])
-  GetTweetLike(@Parent() tweet: Tweet) {
+  GetLikesByTweet(@Parent() tweet: Tweet) {
     const { id } = tweet;
-    return this.likeService.getTweetLike(id);
+    return this.likeService.getLikesByTweet(id);
   }
 
+  // get comments on this tweet
   @ResolveField(() => [Comment])
-  GetTweetComment(@Parent() tweet: Tweet) {
+  GetCommentsByTweet(@Parent() tweet: Tweet) {
     const { id } = tweet;
-    return this.commentService.getTweetComment(id);
+    return this.commentService.getCommentsByTweet(id);
   }
 
-  // get like count
+  // get like count on this tweet
   @ResolveField(() => Count)
   GetLikeCount(@Parent() tweet: Tweet) {
     const { id } = tweet;
     return this.likeService.getLikeCount(id);
   }
 
-  // get retweet count
+  // get retweet count on this tweet
   @ResolveField(() => Count)
   GetRetweetCount(@Parent() tweet: Tweet) {
     const { id } = tweet;
     return this.retweetService.getRetweetCount(id);
   }
 
-  // get retweet count
+  // get comment count on this tweet
   @ResolveField(() => Count)
   GetCommentCount(@Parent() tweet: Tweet) {
     const { id } = tweet;
