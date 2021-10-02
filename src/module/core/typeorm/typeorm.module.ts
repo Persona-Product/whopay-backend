@@ -12,15 +12,15 @@ import { TypeOrmConfigService } from '@core/typeorm/typeorm.service';
      *   default.envは後続で呼ばれる
      *   同じ変数がある場合は先に定義されているものが優先される
      */
-    ConfigModule.forRoot({
-      envFilePath: [`.env/${process.env.NODE_ENV}.env`],
-      isGlobal: true,
-      // ignoreEnvFile: true, // <- 環境変数から取得する場合はコメントアウトを外す．
-    }),
+    // ConfigModule.forRoot({
+    //   envFilePath: [`.env/${process.env.NODE_ENV}.env`],
+    //   isGlobal: true,
+    //   // ignoreEnvFile: true, // <- 環境変数から取得する場合はコメントアウトを外す．
+    // }),
 
     // graphqlのモジュールをアプリ全体に依存性注入
     GraphQLModule.forRoot({
-      // DTOを検知して、スキーマ自動生成
+      // entityからGraphQLスキーマ生成
       autoSchemaFile: join(process.cwd(), 'src/graphql/schema.gql'),
     }),
 
@@ -30,6 +30,5 @@ import { TypeOrmConfigService } from '@core/typeorm/typeorm.service';
     }),
   ],
   providers: [TypeOrmConfigService],
-  exports: [TypeOrmConfigService],
 })
 export class TypeOrmConfigModule {}
