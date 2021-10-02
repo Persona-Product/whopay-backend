@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Comment } from '@src/entity';
+import { Count } from '@src/class';
 import { CreateCommentDto } from '@comment/dto/create-comment.dto';
 
 @Injectable()
@@ -34,6 +35,18 @@ export class CommentService {
     return await this.commentRepostiory.find({
       tweetId: id,
     });
+  }
+
+  // get like count
+  async getCommentCount(id: number): Promise<Count> {
+    const db = this.commentRepostiory.createQueryBuilder('comments');
+    const query = db
+      .select('count(comments.tweetId)')
+      .where('comments.tweetId = :tweetId', { tweetId: id })
+      .groupBy('comments.tweetId');
+    const result = await query.getRawOne();
+    if (!result) return { count: '0' };
+    return result;
   }
 
   // create comment
