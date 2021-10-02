@@ -40,7 +40,7 @@ export class TweetResolver {
   }
 
   @ResolveField(() => [Retweet])
-  getTweetRetweet(@Parent() tweet: Tweet) {
+  GetTweetRetweet(@Parent() tweet: Tweet) {
     const { id } = tweet;
     return this.retweetService.getTweetRetweet(id);
   }
@@ -51,16 +51,31 @@ export class TweetResolver {
     return this.likeService.getTweetLike(id);
   }
 
-  @ResolveField(() => Count!)
+  @ResolveField(() => [Comment])
+  GetTweetComment(@Parent() tweet: Tweet) {
+    const { id } = tweet;
+    return this.commentService.getTweetComment(id);
+  }
+
+  // get like count
+  @ResolveField(() => Count)
   GetLikeCount(@Parent() tweet: Tweet) {
     const { id } = tweet;
     return this.likeService.getLikeCount(id);
   }
 
-  @ResolveField(() => [Comment])
-  GetTweetComment(@Parent() tweet: Tweet) {
+  // get retweet count
+  @ResolveField(() => Count)
+  GetRetweetCount(@Parent() tweet: Tweet) {
     const { id } = tweet;
-    return this.commentService.getTweetComment(id);
+    return this.retweetService.getRetweetCount(id);
+  }
+
+  // get retweet count
+  @ResolveField(() => Count)
+  GetCommentCount(@Parent() tweet: Tweet) {
+    const { id } = tweet;
+    return this.commentService.getCommentCount(id);
   }
 
   // create tweet
