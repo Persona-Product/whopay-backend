@@ -8,10 +8,12 @@ type User {
   profileBody: String!
   iconId: String!
   createdAt: DateTime!
-  GetUserTweet: [Tweet!]!
-  GetUserReTweet: [Tweet!]!
-  GetUserLike: [Like!]!
-  GetUserComment: [Comment!]!
+  GetTweetsByUser: [Tweet!]!
+  GetRetweetsByUser: [Tweet!]!
+  GetLikesByUser: [Like!]!
+  GetCommentsByUser: [Comment!]!
+  GetFollowingCount: Count!
+  GetFollowerCount: Count!
 }
 
 """
@@ -24,9 +26,9 @@ type Tweet {
   userId: String!
   tweetBody: String!
   createdAt: DateTime!
-  GetTweetRetweet: [Retweet!]!
-  GetTweetLike: [Like!]!
-  GetTweetComment: [Comment!]!
+  GetRetweetsByTweet: [Retweet!]!
+  GetLikesByTweet: [Like!]!
+  GetCommentsByTweet: [Comment!]!
   GetLikeCount: Count!
   GetRetweetCount: Count!
   GetCommentCount: Count!
@@ -66,15 +68,15 @@ type Count {
 }
 
 type Query {
-  GetAllUser: [User!]!
-  GetOneUser(id: String!): User!
-  GetAllTweet: [Tweet!]!
-  GetOneTweet(id: Int!): Tweet!
-  GetAllRetweet: [Retweet!]!
-  GetAllLike: [Like!]!
-  GetAllComment: [Comment!]!
-  GetOneComment(id: Int!): Comment!
-  GetAllFollow: [Follow!]!
+  GetUsers: [User!]!
+  GetUser(id: String!): User!
+  GetTweets: [Tweet!]!
+  GetTweet(id: Int!): Tweet!
+  GetRetweets: [Retweet!]!
+  GetLikes: [Like!]!
+  GetComments: [Comment!]!
+  GetComment(id: Int!): Comment!
+  GetFollows: [Follow!]!
 }
 
 type Mutation {
