@@ -8,16 +8,18 @@ import {
   Resolver,
 } from '@nestjs/graphql';
 import { NotFoundException } from '@nestjs/common';
-import { Comment, User } from '@src/entity';
+import { Comment, User, Tweet } from '@src/entity';
 import { CommentService } from '@comment/comment.service';
 import { CreateCommentDto } from '@comment/dto/create-comment.dto';
 import { UserService } from '@user/user.service';
+import { TweetService } from '@tweet/tweet.service';
 
 @Resolver((of) => Comment)
 export class CommentResolver {
   constructor(
     private commentService: CommentService,
     private userService: UserService,
+    private tweetService: TweetService,
   ) {}
 
   // get comments
@@ -36,7 +38,7 @@ export class CommentResolver {
 
   // create comment
   @Mutation(() => Comment)
-  CreateComment(@Args('tweetDto') createCommentDto: CreateCommentDto) {
+  CreateComment(@Args('commentDto') createCommentDto: CreateCommentDto) {
     return this.commentService.createComment(createCommentDto);
   }
 
@@ -51,5 +53,12 @@ export class CommentResolver {
   GetUserByComment(@Parent() comment: Comment) {
     const { userId } = comment;
     return this.userService.getUser(userId);
+  }
+
+  // get tweet by comment
+  @ResolveField(() => Tweet)
+  GetTweetByComment(@Parent() like: Comment) {
+    const { tweetId } = like;
+    return this.tweetService.getTweet(tweetId);
   }
 }

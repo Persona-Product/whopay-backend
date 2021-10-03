@@ -7,7 +7,7 @@ import {
   Parent,
 } from '@nestjs/graphql';
 import { NotFoundException } from '@nestjs/common';
-import { User, Tweet, Like, Comment, Follow } from '@src/entity';
+import { User, Tweet, Retweet, Like, Comment, Follow } from '@src/entity';
 import { Count } from '@common/count/count';
 import { UserService } from '@user/user.service';
 import { CreateUserDto } from '@user/dto/create-user.dto';
@@ -74,7 +74,7 @@ export class UserResolver {
   }
 
   // get retweets by user
-  @ResolveField(() => [Tweet])
+  @ResolveField(() => [Retweet])
   GetRetweetsByUser(@Parent() user: User) {
     const { id } = user;
     return this.retweetService.getRetweetsByUser(id);
