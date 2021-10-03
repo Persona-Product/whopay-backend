@@ -7,16 +7,18 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
-import { Retweet, User } from '@src/entity';
+import { Retweet, User, Tweet } from '@src/entity';
 import { RetweetService } from '@retweet/retweet.service';
 import { CreateRetweetDto } from '@retweet/dto/create-retweet.dto';
 import { UserService } from '@user/user.service';
+import { TweetService } from '@tweet/tweet.service';
 
 @Resolver((of) => Retweet)
 export class RetweetResolver {
   constructor(
     private retweetService: RetweetService,
     private userService: UserService,
+    private tweetService: TweetService,
   ) {}
 
   // get retweets
@@ -42,5 +44,12 @@ export class RetweetResolver {
   GetUserByRetweet(@Parent() retweet: Retweet) {
     const { userId } = retweet;
     return this.userService.getUser(userId);
+  }
+
+  // get tweet by retweet
+  @ResolveField(() => Tweet)
+  GetTweetByRetweet(@Parent() like: Retweet) {
+    const { tweetId } = like;
+    return this.tweetService.getTweet(tweetId);
   }
 }

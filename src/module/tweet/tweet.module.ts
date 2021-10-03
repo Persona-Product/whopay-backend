@@ -12,9 +12,9 @@ import { CommentModule } from '@comment/comment.module';
   imports: [
     TypeOrmModule.forFeature([Tweet, User, Retweet, Like, Comment]),
     forwardRef(() => UserModule),
-    RetweetModule,
-    LikeModule,
-    CommentModule,
+    forwardRef(() => LikeModule),
+    forwardRef(() => RetweetModule),
+    forwardRef(() => CommentModule),
   ],
   providers: [TweetResolver, TweetService],
   exports: [TweetService],
