@@ -22,17 +22,17 @@ export class FollowService {
     return data;
   }
 
-  // get followers by user
-  async getFollowserByUser(id: string): Promise<Follow[]> {
+  // get followings by user
+  async getFollowingsByUser(id: string): Promise<Follow[]> {
     return await this.followRepostiory.find({
       userId: id,
     });
   }
 
-  // get followings by user
-  async getFollowsingByUser(id: string): Promise<Follow[]> {
+  // get followers by user
+  async getFollowersByUser(id: string): Promise<Follow[]> {
     return await this.followRepostiory.find({
-      userId: id,
+      followingUserId: id,
     });
   }
 

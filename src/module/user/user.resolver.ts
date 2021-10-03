@@ -7,7 +7,7 @@ import {
   Parent,
 } from '@nestjs/graphql';
 import { NotFoundException } from '@nestjs/common';
-import { User, Tweet, Like, Comment } from '@src/entity';
+import { User, Tweet, Like, Comment, Follow } from '@src/entity';
 import { Count } from '@common/count/count';
 import { UserService } from '@user/user.service';
 import { CreateUserDto } from '@user/dto/create-user.dto';
@@ -21,25 +21,24 @@ import { CountService } from '@common/count/count.service';
 
 @Resolver((of) => User)
 export class UserResolver {
-  // 利用する Service が inject される
   constructor(
     private userService: UserService,
     private tweetService: TweetService,
     private retweetService: RetweetService,
     private likeService: LikeService,
     private commentService: CommentService,
-    private followeService: FollowService,
+    private followService: FollowService,
     private countService: CountService,
   ) {}
 
   // get users
-  @Query((returns) => [User])
+  @Query(() => [User])
   GetUsers() {
     return this.userService.getUsers();
   }
 
   // get user
-  @Query((returns) => User)
+  @Query(() => User)
   GetUser(@Args({ name: 'id', type: () => String }) id: string) {
     const user = this.userService.getUser(id);
     if (!user) throw new NotFoundException(id);
@@ -47,13 +46,13 @@ export class UserResolver {
   }
 
   // create user
-  @Mutation((returns) => User)
+  @Mutation(() => User)
   CreateUser(@Args('userDto') createUserDto: CreateUserDto) {
     return this.userService.createUser(createUserDto);
   }
 
   // update user
-  @Mutation((returns) => User)
+  @Mutation(() => User)
   UpdateUser(
     @Args('id') id: string,
     @Args('userDto') updateUserDto: UpdateUserDto,
@@ -62,7 +61,7 @@ export class UserResolver {
   }
 
   // delete user
-  @Mutation((returns) => Boolean)
+  @Mutation(() => Boolean)
   DeleteUser(@Args({ name: 'id', type: () => String }) id: string) {
     return this.userService.deleteUser(id);
   }
@@ -95,14 +94,28 @@ export class UserResolver {
     return this.commentService.getCommentsByUser(id);
   }
 
-  // get folowing count on user
+  // get followers by user
+  @ResolveField(() => [Follow])
+  GetFollowersByUser(@Parent() user: User) {
+    const { id } = user;
+    return this.followService.getFollowersByUser(id);
+  }
+
+  // get followings by user
+  @ResolveField(() => [Follow])
+  GetFollowingsByUser(@Parent() user: User) {
+    const { id } = user;
+    return this.followService.getFollowingsByUser(id);
+  }
+
+  // get folowing count by user
   @ResolveField(() => Count)
   GetFollowingCount(@Parent() user: User) {
     const { id } = user;
     return this.countService.getFollowingCount(id);
   }
 
-  // get folower count on user
+  // get folower count by user
   @ResolveField(() => Count)
   GetFollowerCount(@Parent() user: User) {
     const { id } = user;
