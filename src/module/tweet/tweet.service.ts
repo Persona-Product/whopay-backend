@@ -17,10 +17,10 @@ export class TweetService {
   }
 
   // get tweets
-  async getTweets(): Promise<Tweet[]> {
-    const data = await this.tweetRepostiory.find();
-    return data;
-  }
+  // async getTweets(): Promise<Tweet[]> {
+  //   const data = await this.tweetRepostiory.find();
+  //   return data;
+  // }
 
   // get tweets by user
   async getTweetsByUser(id: string): Promise<Tweet[]> {

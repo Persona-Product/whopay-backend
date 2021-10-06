@@ -32,10 +32,10 @@ export class UserResolver {
   ) {}
 
   // get users
-  @Query(() => [User])
-  GetUsers() {
-    return this.userService.getUsers();
-  }
+  // @Query(() => [User])
+  // GetUsers() {
+  //   return this.userService.getUsers();
+  // }
 
   // get user
   @Query(() => User)

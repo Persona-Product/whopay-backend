@@ -12,15 +12,15 @@ export class CommentService {
   ) {}
 
   // get comment
-  async getComment(id: number): Promise<Comment> {
-    return await this.commentRepostiory.findOne(id);
-  }
+  // async getComment(id: number): Promise<Comment> {
+  //   return await this.commentRepostiory.findOne(id);
+  // }
 
   // get comments
-  async getComments(): Promise<Comment[]> {
-    const data = await this.commentRepostiory.find();
-    return data;
-  }
+  // async getComments(): Promise<Comment[]> {
+  //   const data = await this.commentRepostiory.find();
+  //   return data;
+  // }
 
   // get comments by user
   async getCommentsByUser(id: string): Promise<Comment[]> {

@@ -12,15 +12,15 @@ export class UserService {
     private userRepostiory: Repository<User>,
   ) {}
 
-  // get users
-  async getUsers(): Promise<User[]> {
-    return await this.userRepostiory.find();
-  }
-
   // get user
   async getUser(id: string): Promise<User> {
     return await this.userRepostiory.findOne(id);
   }
+
+  // get users
+  // async getUsers(): Promise<User[]> {
+  //   return await this.userRepostiory.find();
+  // }
 
   // create user
   async createUser(createUserDto: CreateUserDto): Promise<User> {
@@ -34,7 +34,8 @@ export class UserService {
     const user = await this.getUser(id);
     user.userName = updateUserDto.userName;
     user.profileBody = updateUserDto.profileBody;
-    user.iconId = updateUserDto.iconId;
+    user.iconPhoto = updateUserDto.iconPhoto;
+    user.headerPhoto = updateUserDto.headerPhoto;
     await this.userRepostiory.save(user);
     return user;
   }

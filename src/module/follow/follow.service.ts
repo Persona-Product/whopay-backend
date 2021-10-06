@@ -12,15 +12,15 @@ export class FollowService {
   ) {}
 
   // get follow
-  async getFollow(id: number): Promise<Follow> {
-    return await this.followRepostiory.findOne(id);
-  }
+  // async getFollow(id: number): Promise<Follow> {
+  //   return await this.followRepostiory.findOne(id);
+  // }
 
   // get follows
-  async getFollows(): Promise<Follow[]> {
-    const data = await this.followRepostiory.find();
-    return data;
-  }
+  // async getFollows(): Promise<Follow[]> {
+  //   const data = await this.followRepostiory.find();
+  //   return data;
+  // }
 
   // get followings by user
   async getFollowingsByUser(id: string): Promise<Follow[]> {

@@ -20,10 +20,10 @@ export class FollowResolver {
   ) {}
 
   // get follows
-  @Query(() => [Follow])
-  GetFollows() {
-    return this.followService.getFollows();
-  }
+  // @Query(() => [Follow])
+  // GetFollows() {
+  //   return this.followService.getFollows();
+  // }
 
   // get followings
   @Query(() => [Follow])

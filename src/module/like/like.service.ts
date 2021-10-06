@@ -12,15 +12,15 @@ export class LikeService {
   ) {}
 
   // get like
-  async getLike(id: number): Promise<Like> {
-    return await this.likeRepostiory.findOne(id);
-  }
+  // async getLike(id: number): Promise<Like> {
+  //   return await this.likeRepostiory.findOne(id);
+  // }
 
   // get likes
-  async getLikes(): Promise<Like[]> {
-    const data = await this.likeRepostiory.find();
-    return data;
-  }
+  // async getLikes(): Promise<Like[]> {
+  //   const data = await this.likeRepostiory.find();
+  //   return data;
+  // }
 
   // get likes by user
   async getLikesByUser(id: string): Promise<Like[]> {
