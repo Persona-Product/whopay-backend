@@ -22,9 +22,15 @@ export class RetweetResolver {
   ) {}
 
   // get retweets
+  // @Query(() => [Retweet])
+  // GetRetweets() {
+  //   return this.retweetService.getRetweets();
+  // }
+
+  // get retweets by user
   @Query(() => [Retweet])
-  GetRetweets() {
-    return this.retweetService.getRetweets();
+  GetRetweetsByUser(@Args({ name: 'id', type: () => String }) id: string) {
+    return this.retweetService.getRetweetsByUser(id);
   }
 
   // create retweet
