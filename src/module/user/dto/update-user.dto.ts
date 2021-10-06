@@ -11,5 +11,8 @@ export class UpdateUserDto {
   profileBody: string;
 
   @Field()
-  iconId: string;
+  iconPhoto: string;
+
+  @Field()
+  headerPhoto: string;
 }
