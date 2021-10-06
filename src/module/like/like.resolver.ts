@@ -22,9 +22,15 @@ export class LikeResolver {
   ) {}
 
   // get likes
+  // @Query(() => [Like])
+  // GetLikes() {
+  //   return this.likeService.getLikes();
+  // }
+
+  // get likes by user
   @Query(() => [Like])
-  GetLikes() {
-    return this.likeService.getLikes();
+  GetLikesByUser(@Args({ name: 'id', type: () => String }) id: string) {
+    return this.likeService.getLikesByUser(id);
   }
 
   // create like
