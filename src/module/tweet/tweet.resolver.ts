@@ -30,16 +30,23 @@ export class TweetResolver {
   ) {}
 
   // get tweets
-  @Query(() => [Tweet])
-  GetTweets() {
-    return this.tweetService.getTweets();
-  }
+  // @Query(() => [Tweet])
+  // GetTweets() {
+  //   return this.tweetService.getTweets();
+  // }
 
   // get tweet
   @Query(() => Tweet)
   GetTweet(@Args({ name: 'id', type: () => Int }) id: number) {
     const tweet = this.tweetService.getTweet(id);
     if (!tweet) throw new NotFoundException(id);
+    return tweet;
+  }
+
+  // get tweets by user
+  @Query(() => [Tweet])
+  GetTweetsByUser(@Args({ name: 'id', type: () => String }) id: string) {
+    const tweet = this.tweetService.getTweetsByUser(id);
     return tweet;
   }
 
