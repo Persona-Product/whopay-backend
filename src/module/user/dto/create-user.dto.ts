@@ -15,7 +15,10 @@ export class CreateUserDto {
   profileBody: string;
 
   @Field()
-  iconId: string;
+  iconPhoto: string;
+
+  @Field()
+  headerPhoto: string;
 }
 
 // DtoとはData Transfer Objectといい、

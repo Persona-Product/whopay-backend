@@ -26,7 +26,11 @@ export class User extends BaseEntity {
 
   @Column({ nullable: true })
   @Field((type) => String)
-  iconId?: string;
+  iconPhoto?: string;
+
+  @Column({ nullable: true })
+  @Field((type) => String)
+  headerPhoto?: string;
 
   @CreateDateColumn()
   @Field((type) => Date)

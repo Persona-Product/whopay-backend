@@ -12,15 +12,15 @@ export class RetweetService {
   ) {}
 
   // get retweet
-  async getRetweet(id: number): Promise<Retweet> {
-    return await this.retweetRepostiory.findOne(id);
-  }
+  // async getRetweet(id: number): Promise<Retweet> {
+  //   return await this.retweetRepostiory.findOne(id);
+  // }
 
   // get retweets
-  async getRetweets(): Promise<Retweet[]> {
-    const data = await this.retweetRepostiory.find();
-    return data;
-  }
+  // async getRetweets(): Promise<Retweet[]> {
+  //   const data = await this.retweetRepostiory.find();
+  //   return data;
+  // }
 
   // get retweets by user
   async getRetweetsByUser(id: string): Promise<Retweet[]> {

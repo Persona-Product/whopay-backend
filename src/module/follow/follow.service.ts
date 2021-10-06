@@ -12,27 +12,27 @@ export class FollowService {
   ) {}
 
   // get follow
-  async getFollow(id: number): Promise<Follow> {
-    return await this.followRepostiory.findOne(id);
-  }
+  // async getFollow(id: number): Promise<Follow> {
+  //   return await this.followRepostiory.findOne(id);
+  // }
 
   // get follows
-  async getFollows(): Promise<Follow[]> {
-    const data = await this.followRepostiory.find();
-    return data;
-  }
+  // async getFollows(): Promise<Follow[]> {
+  //   const data = await this.followRepostiory.find();
+  //   return data;
+  // }
 
-  // get followers by user
-  async getFollowserByUser(id: string): Promise<Follow[]> {
+  // get followings by user
+  async getFollowingsByUser(id: string): Promise<Follow[]> {
     return await this.followRepostiory.find({
       userId: id,
     });
   }
 
-  // get followings by user
-  async getFollowsingByUser(id: string): Promise<Follow[]> {
+  // get followers by user
+  async getFollowersByUser(id: string): Promise<Follow[]> {
     return await this.followRepostiory.find({
-      userId: id,
+      followingUserId: id,
     });
   }
 

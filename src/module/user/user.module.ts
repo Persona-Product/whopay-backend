@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User, Tweet, Like, Retweet, Comment, Follow } from '@src/entity';
 import { UserResolver } from '@user/user.resolver';
@@ -12,11 +12,11 @@ import { FollowModule } from '@follow/follow.module';
 @Module({
   imports: [
     TypeOrmModule.forFeature([User, Tweet, Retweet, Like, Comment, Follow]),
-    TweetModule,
-    RetweetModule,
-    LikeModule,
-    CommentModule,
-    FollowModule,
+    forwardRef(() => TweetModule),
+    forwardRef(() => RetweetModule),
+    forwardRef(() => LikeModule),
+    forwardRef(() => CommentModule),
+    forwardRef(() => FollowModule),
   ],
   providers: [UserResolver, UserService],
   exports: [UserService],
