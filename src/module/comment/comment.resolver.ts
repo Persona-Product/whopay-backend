@@ -7,7 +7,6 @@ import {
   ResolveField,
   Resolver,
 } from '@nestjs/graphql';
-import { NotFoundException } from '@nestjs/common';
 import { Comment, User, Tweet } from '@src/entity';
 import { CommentService } from '@comment/comment.service';
 import { CreateCommentDto } from '@comment/dto/create-comment.dto';
@@ -23,17 +22,15 @@ export class CommentResolver {
   ) {}
 
   // get comments
-  @Query(() => [Comment])
-  GetComments() {
-    return this.commentService.getComments();
-  }
+  // @Query(() => [Comment])
+  // GetComments() {
+  //   return this.commentService.getComments();
+  // }
 
-  // get comment
-  @Query(() => Comment)
-  GetComment(@Args({ name: 'id', type: () => Int }) id: number) {
-    const tweet = this.commentService.getComment(id);
-    if (!tweet) throw new NotFoundException(id);
-    return tweet;
+  // get comments by user
+  @Query(() => [Comment])
+  GetCommentsByUser(@Args({ name: 'id', type: () => String }) id: string) {
+    return this.commentService.getCommentsByUser(id);
   }
 
   // create comment
