@@ -110,4 +110,24 @@ export class TweetResolver {
     const { id } = tweet;
     return this.countService.getCommentCount(id);
   }
+
+  // get isRetweet by user
+  @ResolveField(() => Boolean)
+  GetIsRetweetByUser(
+    @Parent() tweet: Tweet,
+    @Args({ name: 'userId', type: () => String }) userId: string,
+  ) {
+    const { id } = tweet;
+    return this.retweetService.getIsRetweetByUser(id, userId);
+  }
+
+  // get isLike by user
+  @ResolveField(() => Boolean)
+  GetIsLikeByUser(
+    @Parent() tweet: Tweet,
+    @Args({ name: 'userId', type: () => String }) userId: string,
+  ) {
+    const { id } = tweet;
+    return this.likeService.getIsLikeByUser(id, userId);
+  }
 }
