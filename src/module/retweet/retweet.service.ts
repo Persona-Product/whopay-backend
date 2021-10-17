@@ -36,6 +36,16 @@ export class RetweetService {
     });
   }
 
+  // get isRetweet by user
+  async getIsRetweetByUser(tweetId: number, userId: string): Promise<boolean> {
+    const result = await this.retweetRepostiory.find({
+      tweetId: tweetId,
+      userId: userId,
+    });
+    if (result.length === 0) return false;
+    return true;
+  }
+
   // create retweet
   async createRetweet(createRetweetDto: CreateRetweetDto): Promise<Retweet> {
     const retweet = await this.retweetRepostiory.create(createRetweetDto);
