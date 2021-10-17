@@ -36,6 +36,16 @@ export class LikeService {
     });
   }
 
+  // get isLike by user
+  async getIsLikeByUser(tweetId: number, userId: string): Promise<boolean> {
+    const result = await this.likeRepostiory.find({
+      tweetId: tweetId,
+      userId: userId,
+    });
+    if (result.length === 0) return false;
+    return true;
+  }
+
   // create like
   async createLike(createLikeDto: CreateLikeDto): Promise<Like> {
     const like = await this.likeRepostiory.create(createLikeDto);
