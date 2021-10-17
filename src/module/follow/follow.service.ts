@@ -36,6 +36,19 @@ export class FollowService {
     });
   }
 
+  // get followers by user
+  async getIsFollowByUser(
+    userId: string,
+    followingUserId: string,
+  ): Promise<boolean> {
+    const result = await this.followRepostiory.find({
+      userId: userId,
+      followingUserId: followingUserId,
+    });
+    if (result.length === 0) return false;
+    return true;
+  }
+
   // create follow
   async createFollow(createFollowDto: CreateFollowDto): Promise<Follow> {
     const follow = await this.followRepostiory.create(createFollowDto);

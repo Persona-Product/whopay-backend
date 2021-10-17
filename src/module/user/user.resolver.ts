@@ -121,6 +121,17 @@ export class UserResolver {
     const { id } = user;
     return this.countService.getFollowerCount(id);
   }
+
+  // get isFollow by user
+  @ResolveField(() => Boolean)
+  GetIsFollowByUser(
+    @Parent() user: User,
+    @Args({ name: 'userId', type: () => String })
+    userId: string,
+  ) {
+    const { id } = user;
+    return this.followService.getIsFollowByUser(userId, id);
+  }
 }
 
 // Resolverはルーティングのロジックを記述
