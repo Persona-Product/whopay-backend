@@ -1,1 +1,1 @@
-create database twitter_clone;
+CREATE DATABASE whopay_database DEFAULT CHARACTER SET utf8;
