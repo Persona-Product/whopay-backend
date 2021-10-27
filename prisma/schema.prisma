@@ -9,3 +9,45 @@ datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id String @id  
+  firstName String
+  lastName String
+  email String @unique
+  phone Int
+  password String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Credit Credit[]
+  Voice Voice[]
+  Payment Payment[]
+}
+
+model Credit {
+  id String @id
+  userId String
+  User User @relation(fields: [userId], references: [id])
+  creditNumber Int
+  securityKey Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Voice {
+  id String @id
+  userId String
+  User User @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  Payment Payment[]
+}
+
+model Payment {
+  id String @id
+  userId String
+  User User @relation(fields: [userId], references: [id])
+  voiceId String
+  Voice Voice @relation(fields: [voiceId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
