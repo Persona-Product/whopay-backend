@@ -5,7 +5,7 @@ services:
     # どのイメージを使用するか（DockerHubから選択）
     image: mysql:8.0
     # コンテナ作成時の名前
-    container_name: myaql
+    container_name: mysql
     # データの保管&同期
     volumes:
       # docker-entrypoint-initdb.dはコンテナ作成時にSQLなどを実行できる
