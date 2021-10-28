@@ -4,13 +4,17 @@
 
 ## Installation
 
-```bash
-git clone https://github.com/Persona-Product/twitter-clone-backend-graphql.git
+.env 作成
+
+```
+NODE_ENV=development
+PORT=4000
+DATABASE_URL="mysql://root:password@localhost:3306/whopay_database"
 ```
 
 ## Running the app
 
 ```bash
 # development
-$ docker-compose up
+$ docker-compose up -d
 ```
