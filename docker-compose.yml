@@ -35,7 +35,7 @@ services:
       dockerfile: Dockerfile
 
     # コンテナ作成時の名前
-    container_name: nest-graphql-api
+    container_name: whopay-api
 
     volumes:
       # ホストとコンテナのファイル同期
