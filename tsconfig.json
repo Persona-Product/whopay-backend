@@ -13,9 +13,7 @@
     "paths": {
       "@src/*": ["src/*"],
       "@core/*": ["src/module/core/*"],
-      "@common/*": ["src/module/common/*"],
-      "@user/*": ["src/module/user/*"],
-      "@tweet/*": ["src/module/tweet/*"]
+      "@user/*": ["src/module/user/*"]
     },
     "incremental": true,
     "skipLibCheck": true,
