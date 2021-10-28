@@ -1,10 +1,18 @@
 import { Module } from '@nestjs/common';
 import { CoreModule } from '@core/core.module';
 import { CommonModule } from '@common/common.module';
-import { UserModule } from '@user/user.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [CoreModule, CommonModule, UserModule],
+  imports: [
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: [`.env`],
+      load: [],
+    }),
+    CoreModule,
+    CommonModule,
+  ],
   providers: [],
   controllers: [],
 })
