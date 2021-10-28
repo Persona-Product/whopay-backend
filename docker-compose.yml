@@ -11,7 +11,7 @@ services:
       # docker-entrypoint-initdb.dはコンテナ作成時にSQLなどを実行できる
       - ./initdb:/docker-entrypoint-initdb.d
       # ホストとコンテナのファイル同期
-      # - ./data/mysql:/var/lib/mysql
+      - ./data/mysql:/var/lib/mysql
 
     # ポートの番号紐付け
     ports:

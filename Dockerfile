@@ -14,7 +14,6 @@ LABEL maintainer="persona product"
 # ENV PORT=4000
 # ENV DATABASE_URL=postgres://root:password@postgres:5432/twitter_clone
 
-
 # コンテナ内の作業ディレクトリ
 WORKDIR /app
 
@@ -23,19 +22,14 @@ COPY package.json yarn.lock ./
 # ./で書いても同じ
 # COPY package.json yarn.lock /app
 
-
 RUN yarn
 # package.json yarn.lockを素に、ホストの環境と同じパッケージをインストール
-
 
 COPY . .
 # ホストマシンのディレクトリを、コンテナ内の/appへバンドル
 
-
 EXPOSE 4000
 # ポート番号の指定
-
-ENV DATABASE_URL="mysql://root:password@mysql:3306/whopay_database"
 
 # 起動コマンド
 CMD [ "yarn", "start:dev" ]
