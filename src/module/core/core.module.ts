@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmConfigModule } from '@core/typeorm/typeorm.module';
+import { PrismaModule } from '@core/prisma/prisma.module';
 
 @Module({
-  imports: [TypeOrmConfigModule],
+  imports: [PrismaModule],
 })
 export class CoreModule {}
