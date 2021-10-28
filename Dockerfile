@@ -35,6 +35,7 @@ COPY . .
 EXPOSE 4000
 # ポート番号の指定
 
+ENV DATABASE_URL="mysql://root:password@mysql:3306/whopay_database"
 
 # 起動コマンド
 CMD [ "yarn", "start:dev" ]

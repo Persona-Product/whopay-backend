@@ -16,7 +16,7 @@ services:
     # ポートの番号紐付け
     ports:
       # ホスト:コンテナ
-      - 5433:5432
+      - 3306:3306
 
     # 環境変数
     environment:
@@ -55,7 +55,7 @@ services:
       NODE_ENV: development
       PORT: 4000
       DATABASE_SYNC: 'true'
-      DATABASE_URL: mysql://root:password@mysql:5432/whopay_database
+      DATABASE_URL: mysql://root:password@mysql:3306/whopay_database
 
     # 再起動の設定
     restart: always
