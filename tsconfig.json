@@ -15,11 +15,7 @@
       "@core/*": ["src/module/core/*"],
       "@common/*": ["src/module/common/*"],
       "@user/*": ["src/module/user/*"],
-      "@tweet/*": ["src/module/tweet/*"],
-      "@retweet/*": ["src/module/retweet/*"],
-      "@comment/*": ["src/module/comment/*"],
-      "@follow/*": ["src/module/follow/*"],
-      "@like/*": ["src/module/like/*"]
+      "@tweet/*": ["src/module/tweet/*"]
     },
     "incremental": true,
     "skipLibCheck": true,
