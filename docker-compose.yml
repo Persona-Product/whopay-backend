@@ -5,13 +5,13 @@ services:
     # どのイメージを使用するか（DockerHubから選択）
     image: mysql:8.0
     # コンテナ作成時の名前
-    container_name: myaql
+    container_name: mysql
     # データの保管&同期
     volumes:
       # docker-entrypoint-initdb.dはコンテナ作成時にSQLなどを実行できる
       - ./initdb:/docker-entrypoint-initdb.d
       # ホストとコンテナのファイル同期
-      # - ./data/mysql:/var/lib/mysql
+      - ./data/mysql:/var/lib/mysql
 
     # ポートの番号紐付け
     ports:
@@ -35,7 +35,7 @@ services:
       dockerfile: Dockerfile
 
     # コンテナ作成時の名前
-    container_name: nest-graphql-api
+    container_name: whopay-api
 
     volumes:
       # ホストとコンテナのファイル同期
