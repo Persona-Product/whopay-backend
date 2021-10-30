@@ -16,7 +16,7 @@ model User {
   firstName String
   lastName String
   email String @unique
-  phone Int
+  phone String @unique @db.VarChar(11)
   password String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
