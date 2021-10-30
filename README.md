@@ -17,4 +17,7 @@ DATABASE_URL="mysql://root:password@localhost:3306/whopay_database"
 ```bash
 # development
 $ docker-compose up -d
+
+# コンテナを消す時
+$ docker-compose down
 ```
