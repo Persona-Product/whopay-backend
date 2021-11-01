@@ -1,54 +1,51 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
-  binaryTargets = ["native","darwin","debian-openssl-1.1.x"]
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "darwin", "debian-openssl-1.1.x"]
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model User {
-  id String @id  
+  id        String    @id
   firstName String
-  lastName String
-  email String @unique
-  phone String @unique @db.VarChar(11)
-  password String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  Credit Credit[]
-  Voice Voice[]
-  Payment Payment[]
+  lastName  String
+  email     String    @unique
+  phone     String    @unique @db.VarChar(11)
+  password  String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  Credit    Credit[]
+  Payment   Payment[]
+  Voice     Voice[]
 }
 
 model Credit {
-  id String @id
-  userId String
-  User User @relation(fields: [userId], references: [id])
+  id           String   @id
+  userId       String
   creditNumber Int
-  securityKey Int
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  securityKey  Int
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  User         User     @relation(fields: [userId], references: [id])
 }
 
 model Voice {
-  id String @id
-  userId String
-  User User @relation(fields: [userId], references: [id])
-  createdAt DateTime @default(now())
-  Payment Payment[]
+  id        String    @id
+  userId    String
+  createdAt DateTime  @default(now())
+  User      User      @relation(fields: [userId], references: [id])
+  Payment   Payment[]
 }
 
 model Payment {
-  id String @id
-  userId String
-  User User @relation(fields: [userId], references: [id])
-  voiceId String
-  Voice Voice @relation(fields: [voiceId], references: [id])
+  id        String   @id
+  userId    String
+  voiceId   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  User      User     @relation(fields: [userId], references: [id])
+  Voice     Voice    @relation(fields: [voiceId], references: [id])
 }
