@@ -20,7 +20,7 @@ export class UserController {
       firstName: '宮原',
       lastName: '将太',
       email: 'miyasan31@gmail.com',
-      phone: 123456789,
+      phone: '08027120301',
       password: 'password',
     };
     return this.usersService.createUser(data);
