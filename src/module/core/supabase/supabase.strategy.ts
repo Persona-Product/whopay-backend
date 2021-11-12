@@ -19,12 +19,9 @@ export class SupabaseStrategy extends PassportStrategy(
     });
   }
 
-  async validate(payload: any): Promise<any> {
+  validate(payload: any): Promise<any> {
     super.validate(payload);
-    const session = await this.authService.signin(
-      payload.username,
-      payload.password,
-    );
+    const session = this.authService.signin(payload.username, payload.password);
     if (!session) {
       throw new UnauthorizedException();
     }
