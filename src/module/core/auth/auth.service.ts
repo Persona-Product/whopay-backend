@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Session } from '@supabase/supabase-js';
-import { SupabaseService } from '../supabase/supabase.service';
+import { SupabaseService } from '@core/supabase/supabase.service';
 
 @Injectable()
 export class AuthService {

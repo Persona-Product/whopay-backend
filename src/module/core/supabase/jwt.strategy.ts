@@ -1,20 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { ConfigService } from '@nestjs/config';
 import { SupabaseService } from '@core/supabase/supabase.service';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
-  constructor(
-    private readonly supabaseService: SupabaseService,
-    private readonly configService: ConfigService,
-  ) {
+  constructor(private readonly supabaseService: SupabaseService) {
     super({
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
-      secretOrKey: configService.get('SUPABASE_JWT_SECRET'),
       passReqToCallback: true,
+      secretOrKey: process.env.SUPABASE_JWT_SECRET,
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     });
   }
 
@@ -34,15 +30,11 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
           console.log(error);
         }
         // Set auth to the anon key.
-        this.supabaseService.client.auth.setAuth(
-          this.configService.get('SUPABASE_KEY'),
-        );
+        this.supabaseService.client.auth.setAuth(process.env.SUPABASE_KEY);
       }
     } else {
       // Set auth to the anon key.
-      this.supabaseService.client.auth.setAuth(
-        this.configService.get('SUPABASE_KEY'),
-      );
+      this.supabaseService.client.auth.setAuth(process.env.SUPABASE_KEY);
     }
     return payload;
   }

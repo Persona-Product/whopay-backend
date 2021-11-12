@@ -1,13 +1,8 @@
-import {
-  Controller,
-  Request,
-  Post,
-  // UseGuards
-} from '@nestjs/common';
+import { Controller, Request, Post, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { Token } from '@core/auth/token.decorator';
-// import { JwtSupabaseAuthGuard } from '@core/guard/jwt-supabase-auth.guard';
-// import { LocalSupabaseAuthGuard } from '@core/guard/local-supabase-auth.guard';
+import { SupabaseJwtAuthGuard } from '@core/supabase/guard/supabase-jwt-auth.guard';
+import { SupabaseAuthGuard } from '@core/supabase/guard/supabase-auth.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -27,7 +22,7 @@ export class AuthController {
     return { result, phone };
   }
 
-  // @UseGuards(LocalSupabaseAuthGuard)
+  @UseGuards(SupabaseAuthGuard)
   @Post('signin')
   signin(@Request() req) {
     const { phone, password } = req.body;
@@ -35,7 +30,7 @@ export class AuthController {
     return { result, phone };
   }
 
-  // @UseGuards(JwtSupabaseAuthGuard)
+  @UseGuards(SupabaseJwtAuthGuard)
   @Post('signout')
   signout(@Token() token: string) {
     const result = this.authService.signout(token);
