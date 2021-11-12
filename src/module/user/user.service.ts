@@ -6,10 +6,10 @@ import { PrismaService } from '@core/prisma/prisma.service';
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
-  async getUser(): Promise<User | null> {
+  async getUser(userId: string): Promise<User | null> {
     return this.prisma.user.findUnique({
       where: {
-        id: 'vbadfkvnakva_1',
+        id: userId,
       },
     });
   }
