@@ -21,7 +21,10 @@ export class SupabaseStrategy extends PassportStrategy(
 
   validate(payload: any): Promise<any> {
     super.validate(payload);
-    const session = this.authService.signin(payload.username, payload.password);
+    const session = this.authService.signinUser(
+      payload.username,
+      payload.password,
+    );
     if (!session) {
       throw new UnauthorizedException();
     }
