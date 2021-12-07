@@ -14,12 +14,24 @@ model User {
   lastName  String
   email     String    @unique
   phone     String    @unique @db.VarChar(11)
-  password  String
+  token     String    @unique
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   Credit    Credit[]
   Payment   Payment[]
   Voice     Voice[]
+}
+
+model Shop {
+  id        String    @id
+  shopName  String
+  email     String    @unique
+  phone     String    @unique @db.VarChar(11)
+  token     String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  address   String
+  Payment   Payment[]
 }
 
 model Credit {
@@ -43,9 +55,11 @@ model Voice {
 model Payment {
   id        String   @id
   userId    String
+  shopId    String
   voiceId   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  Shop      Shop     @relation(fields: [shopId], references: [id])
   User      User     @relation(fields: [userId], references: [id])
   Voice     Voice    @relation(fields: [voiceId], references: [id])
 }

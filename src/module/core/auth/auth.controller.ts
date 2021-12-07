@@ -8,32 +8,70 @@ import { SupabaseAuthGuard } from '@core/supabase/guard/supabase-auth.guard';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  @Post('session/user')
+  async sessionUser(@Request() req) {
+    const { token } = req.body;
+    const result = await this.authService.sessionUser(token);
+    return result;
+  }
+
+  @Post('session/shop')
+  async sessionShop(@Request() req) {
+    const { token } = req.body;
+    const result = await this.authService.sessionShop(token);
+    return result;
+  }
+
   @Post('signup')
-  signup(@Request() req) {
+  async signup(@Request() req) {
     const { phone, password } = req.body;
-    const result = this.authService.signup(phone, password);
-    return { result, phone };
+    const result = await this.authService.signup(phone, password);
+    return result;
   }
 
   @Post('verify')
-  verify(@Request() req) {
+  async verify(@Request() req) {
     const { phone, token } = req.body;
-    const result = this.authService.verify(phone, token);
-    return { result, phone };
+    const result = await this.authService.verify(phone, token);
+    return result;
   }
 
-  @UseGuards(SupabaseAuthGuard)
-  @Post('signin')
-  signin(@Request() req) {
+  @Post('register/user')
+  async registerUser(@Request() req) {
+    const body = req.body;
+    const result = await this.authService.registerUser(body);
+    return result;
+  }
+
+  @Post('register/shop')
+  async registerShop(@Request() req) {
+    const body = req.body;
+    const result = await this.authService.registerShop(body);
+    return result;
+  }
+
+  // @UseGuards(SupabaseAuthGuard)
+  @Post('signin/user')
+  async signinUser(@Request() req) {
     const { phone, password } = req.body;
-    const result = this.authService.signin(phone, password);
-    return { result, phone };
+    const result = await this.authService.signinUser(phone, password);
+    return result;
   }
 
-  @UseGuards(SupabaseJwtAuthGuard)
+  // @UseGuards(SupabaseAuthGuard)
+  @Post('signin/shop')
+  async signinShop(@Request() req) {
+    const { phone, password } = req.body;
+    const result = await this.authService.signinShop(phone, password);
+    return result;
+  }
+
+  // @UseGuards(SupabaseJwtAuthGuard)
   @Post('signout')
-  signout(@Token() token: string) {
-    const result = this.authService.signout(token);
+  // async signout(@Token() token: string) {
+  async signout(@Request() req) {
+    const { token } = req.body;
+    const result = await this.authService.signout(token);
     return { result };
   }
 }
