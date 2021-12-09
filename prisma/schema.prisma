@@ -14,7 +14,7 @@ model User {
   lastName  String
   email     String    @unique
   phone     String    @unique @db.VarChar(11)
-  token     String    @unique
+  password  String
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   Credit    Credit[]
