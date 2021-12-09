@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Put, Delete } from '@nestjs/common';
 import { UserService } from '@user/user.service';
 import { User } from '@prisma/client';
 
@@ -9,12 +9,25 @@ export class UserController {
   // GET - /user
   @Get()
   getAllUser(@Body() { userId: id }): Promise<any> {
-    return this.usersService.getUser(id);
+    return this.usersService.getAllUser(id);
   }
 
-  // GET - /user
+  // POST - /user
   @Post()
   createUser(@Body() data: any): Promise<User> {
     return this.usersService.createUser(data);
+  }
+
+  @Put()
+  updateUser(
+    @Body()
+    { userId: id, data: data },
+  ): Promise<User> {
+    return this.usersService.updateUser(id, data);
+  }
+
+  @Delete()
+  deleteUser(@Body() { userId: id }): Promise<User> {
+    return this.usersService.deleteUser(id);
   }
 }
