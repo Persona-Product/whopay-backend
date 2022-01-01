@@ -6,10 +6,10 @@ import { PrismaService } from '@core/prisma/prisma.service';
 export class UserService {
   constructor(private prisma: PrismaService) {}
 
-  async getAllUser(userId: string): Promise<User | null> {
+  async getUser(id: User['id']): Promise<User | null> {
     return this.prisma.user.findUnique({
       where: {
-        id: userId,
+        id: id,
       },
     });
   }
@@ -21,18 +21,18 @@ export class UserService {
   }
 
   async updateUser(
-    userId: string,
+    id: User['id'],
     data: Prisma.UserUpdateInput,
   ): Promise<User> {
     return await this.prisma.user.update({
-      where: { id: userId },
+      where: { id: id },
       data,
     });
   }
 
-  async deleteUser(userId: string): Promise<User> {
+  async deleteUser(id: User['id']): Promise<User> {
     return await this.prisma.user.delete({
-      where: { id: userId },
+      where: { id: id },
     });
   }
 }
