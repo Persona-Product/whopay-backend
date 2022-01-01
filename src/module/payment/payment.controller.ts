@@ -1,6 +1,5 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get } from '@nestjs/common';
 import { PaymentService } from './payment.service';
-import { Store } from '@prisma/client';
 
 @Controller('payment')
 export class PaymentController {
