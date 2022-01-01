@@ -14,7 +14,8 @@ model User {
   lastName  String
   email     String    @unique
   phone     String    @unique @db.VarChar(11)
-  password  String
+  passcode  String?    @db.VarChar(4) 
+  token     String    @unique
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   Credit    Credit[]
@@ -25,12 +26,12 @@ model User {
 model Shop {
   id        String    @id
   shopName  String
+  address   String
   email     String    @unique
   phone     String    @unique @db.VarChar(11)
   token     String    @unique
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  address   String
   Payment   Payment[]
 }
 
