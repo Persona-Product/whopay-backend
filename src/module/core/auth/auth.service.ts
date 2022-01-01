@@ -11,7 +11,7 @@ export class AuthService {
     private prisma: PrismaService,
   ) {}
 
-  async sessionShop(token: string): Promise<Shop | null> {
+  async sessionShop(token: Shop['token']): Promise<Shop | null> {
     const shop = await this.prisma.shop.findUnique({
       where: {
         token: token,
@@ -21,7 +21,7 @@ export class AuthService {
     return shop;
   }
 
-  async sessionUser(token: string): Promise<User | null> {
+  async sessionUser(token: User['token']): Promise<User | null> {
     const user = await this.prisma.user.findUnique({
       where: {
         token: token,
