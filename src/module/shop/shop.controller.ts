@@ -5,38 +5,39 @@ import {
   Post,
   Put,
   Delete,
-  Header,
+  Param,
 } from '@nestjs/common';
 import { ShopService } from './shop.service';
-import { Shop } from '@prisma/client';
+import { Prisma, Shop } from '@prisma/client';
 
 @Controller('shop')
 export class ShopController {
   constructor(private shopsService: ShopService) {}
 
-  // GET - /Shop
-  @Get()
-  @Header('shoptoken', 'token')
-  getAllShop(@Body() { shopId: id }): Promise<any> {
-    return this.shopsService.getAllShop(id);
+  // GET - /shop/:id
+  @Get(':id')
+  getShop(@Param() id: Shop['id']): Promise<Shop> {
+    return this.shopsService.getShop(id);
   }
 
-  // POST - /Shop
+  // POST - /shop
   @Post()
-  createShop(@Body() data: any): Promise<Shop> {
+  createShop(@Body() data: Prisma.ShopCreateInput): Promise<Shop> {
     return this.shopsService.createShop(data);
   }
 
-  //PUT - /Shop
-  @Put()
-  updateShop(@Body() { ShopId: id, data: data }): Promise<Shop> {
+  //PUT - /shop/:id
+  @Put(':id')
+  updateShop(
+    @Param('id') id: Shop['id'],
+    @Body() data: Prisma.ShopUpdateInput,
+  ): Promise<Shop> {
     return this.shopsService.updateShop(id, data);
   }
 
-  // @Header('userToken', 'token')
-  //DELETE - /Shop
-  @Delete()
-  deleteShop(@Body() { ShopId: id }): Promise<Shop> {
+  //DELETE - /shop/:id
+  @Delete(':id')
+  deleteShop(@Param('id') id: Shop['id']): Promise<Shop> {
     return this.shopsService.deleteShop(id);
   }
 }

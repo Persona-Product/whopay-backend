@@ -6,10 +6,10 @@ import { PrismaService } from '@core/prisma/prisma.service';
 export class ShopService {
   constructor(private prisma: PrismaService) {}
 
-  async getAllShop(ShopId: string): Promise<Shop | null> {
+  async getShop(id: Shop['id']): Promise<Shop> {
     return this.prisma.shop.findUnique({
       where: {
-        id: ShopId,
+        id: id,
       },
     });
   }
@@ -21,18 +21,18 @@ export class ShopService {
   }
 
   async updateShop(
-    ShopId: string,
+    id: Shop['id'],
     data: Prisma.ShopUpdateInput,
   ): Promise<Shop> {
     return await this.prisma.shop.update({
-      where: { id: ShopId },
+      where: { id: id },
       data,
     });
   }
 
-  async deleteShop(ShopId: string): Promise<Shop> {
+  async deleteShop(id: Shop['id']): Promise<Shop> {
     return await this.prisma.shop.delete({
-      where: { id: ShopId },
+      where: { id: id },
     });
   }
 }
