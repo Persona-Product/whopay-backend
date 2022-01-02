@@ -17,7 +17,8 @@
       "@shop/*": ["src/module/shop/*"],
       "@payment/*": ["src/module/payment/*"],
       "@voice/*": ["src/module/voice/*"],
-      "@credit/*": ["src/module/credit/*"]
+      "@credit/*": ["src/module/credit/*"],
+      "@pyshell/*": ["src/module/pyshell/*"]
     },
     "incremental": true,
     "skipLibCheck": true,
