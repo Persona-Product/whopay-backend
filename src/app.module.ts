@@ -6,7 +6,7 @@ import { VoiceModule } from '@voice/voice.module';
 import { CreditModule } from '@credit/credit.module';
 import { PaymentModule } from '@payment/payment.module';
 import { ShopModule } from '@shop/shop.module';
-import { PyshellModule } from '@pyshell/pyshell.module';
+// import { PyshellModule } from '@pyshell/pyshell.module';
 
 @Module({
   imports: [
@@ -21,7 +21,7 @@ import { PyshellModule } from '@pyshell/pyshell.module';
     CreditModule,
     PaymentModule,
     ShopModule,
-    PyshellModule,
+    // PyshellModule,
   ],
   providers: [],
   controllers: [],
