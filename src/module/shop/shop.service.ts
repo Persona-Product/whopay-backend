@@ -8,9 +8,7 @@ export class ShopService {
 
   async getShop(id: Shop['id']): Promise<Shop> {
     return this.prisma.shop.findUnique({
-      where: {
-        id: id,
-      },
+      where: { id },
     });
   }
 
@@ -19,14 +17,14 @@ export class ShopService {
     data: Prisma.ShopUpdateInput,
   ): Promise<Shop> {
     return await this.prisma.shop.update({
-      where: { id: id },
+      where: { id },
       data,
     });
   }
 
   async deleteShop(id: Shop['id']): Promise<Shop> {
     return await this.prisma.shop.delete({
-      where: { id: id },
+      where: { id },
     });
   }
 }

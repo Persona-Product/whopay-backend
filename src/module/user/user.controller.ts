@@ -16,9 +16,9 @@ export class UserController {
   @Put(':id')
   updateUser(
     @Param('id') id: User['id'],
-    @Body() data: Prisma.UserUpdateInput,
+    @Body() updateBody: Prisma.UserUpdateInput,
   ): Promise<User> {
-    return this.usersService.updateUser(id, data);
+    return this.usersService.updateUser(id, updateBody);
   }
 
   // DELETE - /user/:id

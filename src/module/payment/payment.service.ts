@@ -6,11 +6,9 @@ import { PrismaService } from '@core/prisma/prisma.service';
 export class PaymentService {
   constructor(private prisma: PrismaService) {}
 
-  async getAllPayment(paymentId: number): Promise<Payment | null> {
+  async getPayment(id: Payment['id']): Promise<Payment> {
     return this.prisma.payment.findUnique({
-      where: {
-        id: paymentId,
-      },
+      where: { id },
     });
   }
 }

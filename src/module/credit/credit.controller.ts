@@ -3,36 +3,41 @@ import {
   Controller,
   Delete,
   Get,
-  Header,
   Post,
   Put,
+  Param,
 } from '@nestjs/common';
-import { Credit } from '@prisma/client';
+import { Credit, Prisma } from '@prisma/client';
 import { CreditService } from '@credit/credit.service';
 
 @Controller('credit')
 export class CreditController {
   constructor(private creditsService: CreditService) {}
 
-  // GET - /credit
-  @Get()
-  getAllCredit(@Body() { creditId: id }): Promise<any> {
+  // GET - /credit:id
+  @Get(':id')
+  getAllCredit(@Param('id') id: Credit['id']): Promise<Credit> {
     return this.creditsService.getAllCredit(id);
   }
 
+  // POST - /credit
   @Post()
-  createCredit(@Body() data: any): Promise<Credit> {
-    return this.creditsService.createCredit(data);
+  createCredit(@Body() createBody: Prisma.CreditCreateInput): Promise<Credit> {
+    return this.creditsService.createCredit(createBody);
   }
 
-  @Put()
-  updateStore(@Body() { creditId: id, data: data }): Promise<Credit> {
-    return this.creditsService.updateCredit(id, data);
+  // PUT - /credit/:id
+  @Put(':id')
+  updateCredit(
+    @Param('id') id: Credit['id'],
+    @Body() updateBody: Prisma.CreditUpdateInput,
+  ): Promise<Credit> {
+    return this.creditsService.updateCredit(id, updateBody);
   }
 
-  @Delete()
-  @Header('usertoken', 'token')
-  deleteStore(@Body() { creditId: id }): Promise<Credit> {
+  // DLETE - /credit/:id
+  @Delete(':id')
+  deleteCredit(@Param('id') id: Credit['id']): Promise<Credit> {
     return this.creditsService.deleteCredit(id);
   }
 }

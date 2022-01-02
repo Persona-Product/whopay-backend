@@ -12,16 +12,16 @@ export class ShopController {
     return this.shopsService.getShop(id);
   }
 
-  //PUT - /shop/:id
+  // PUT - /shop/:id
   @Put(':id')
   updateShop(
     @Param('id') id: Shop['id'],
-    @Body() data: Prisma.ShopUpdateInput,
+    @Body() updateBody: Prisma.ShopUpdateInput,
   ): Promise<Shop> {
-    return this.shopsService.updateShop(id, data);
+    return this.shopsService.updateShop(id, updateBody);
   }
 
-  //DELETE - /shop/:id
+  // DELETE - /shop/:id
   @Delete(':id')
   deleteShop(@Param('id') id: Shop['id']): Promise<Shop> {
     return this.shopsService.deleteShop(id);

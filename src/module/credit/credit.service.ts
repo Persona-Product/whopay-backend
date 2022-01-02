@@ -6,11 +6,9 @@ import { PrismaService } from '@core/prisma/prisma.service';
 export class CreditService {
   constructor(private prisma: PrismaService) {}
 
-  async getAllCredit(CreditId: number): Promise<Credit | null> {
+  async getAllCredit(id: Credit['id']): Promise<Credit> {
     return this.prisma.credit.findUnique({
-      where: {
-        id: CreditId,
-      },
+      where: { id },
     });
   }
 
@@ -21,18 +19,18 @@ export class CreditService {
   }
 
   async updateCredit(
-    CreditId: number,
+    id: Credit['id'],
     data: Prisma.CreditUpdateInput,
   ): Promise<Credit> {
     return await this.prisma.credit.update({
-      where: { id: CreditId },
+      where: { id },
       data,
     });
   }
 
-  async deleteCredit(CreditId: number): Promise<Credit> {
+  async deleteCredit(id: Credit['id']): Promise<Credit> {
     return await this.prisma.credit.delete({
-      where: { id: CreditId },
+      where: { id },
     });
   }
 }

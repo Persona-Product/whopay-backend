@@ -36,8 +36,8 @@ export class VoiceService {
     // voice情報データを保存
     return await this.prisma.voice.create({
       data: {
-        User: { connect: { id: data.User.connect.id } },
         voiceFile: fileName,
+        User: { connect: { id: data.User.connect.id } },
       },
     });
   }

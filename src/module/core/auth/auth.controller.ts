@@ -1,15 +1,9 @@
 import { Controller, Request, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { UserService } from '@user/user.service';
-import { ShopService } from '@shop/shop.service';
 
 @Controller('auth')
 export class AuthController {
-  constructor(
-    private readonly userService: UserService,
-    private readonly shopService: ShopService,
-    private readonly authService: AuthService,
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Post('session/user')
   async sessionUser(@Request() req) {
