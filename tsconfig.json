@@ -13,7 +13,11 @@
     "paths": {
       "@src/*": ["src/*"],
       "@core/*": ["src/module/core/*"],
-      "@user/*": ["src/module/user/*"]
+      "@user/*": ["src/module/user/*"],
+      "@shop/*": ["src/module/shop/*"],
+      "@payment/*": ["src/module/payment/*"],
+      "@voice/*": ["src/module/voice/*"],
+      "@credit/*": ["src/module/credit/*"]
     },
     "incremental": true,
     "skipLibCheck": true,
