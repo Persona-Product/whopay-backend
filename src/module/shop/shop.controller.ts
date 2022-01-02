@@ -1,14 +1,6 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  Put,
-  Delete,
-  Param,
-} from '@nestjs/common';
-import { ShopService } from './shop.service';
+import { Body, Controller, Get, Put, Delete, Param } from '@nestjs/common';
 import { Prisma, Shop } from '@prisma/client';
+import { ShopService } from '@shop/shop.service';
 
 @Controller('shop')
 export class ShopController {
@@ -18,12 +10,6 @@ export class ShopController {
   @Get(':id')
   getShop(@Param() id: Shop['id']): Promise<Shop> {
     return this.shopsService.getShop(id);
-  }
-
-  // POST - /shop
-  @Post()
-  createShop(@Body() data: Prisma.ShopCreateInput): Promise<Shop> {
-    return this.shopsService.createShop(data);
   }
 
   //PUT - /shop/:id

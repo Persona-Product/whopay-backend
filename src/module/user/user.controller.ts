@@ -1,14 +1,6 @@
-import {
-  Body,
-  Controller,
-  Get,
-  Post,
-  Put,
-  Delete,
-  Param,
-} from '@nestjs/common';
-import { UserService } from '@user/user.service';
+import { Body, Controller, Get, Put, Delete, Param } from '@nestjs/common';
 import { Prisma, User } from '@prisma/client';
+import { UserService } from '@user/user.service';
 
 @Controller('user')
 export class UserController {
@@ -18,12 +10,6 @@ export class UserController {
   @Get(':id')
   getUser(@Param('id') id: User['id']): Promise<User> {
     return this.usersService.getUser(id);
-  }
-
-  // POST - /user
-  @Post()
-  createUser(@Body() data: Prisma.UserCreateInput): Promise<User> {
-    return this.usersService.createUser(data);
   }
 
   // PUT - /user/:id

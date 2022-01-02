@@ -1,12 +1,15 @@
-import { Controller, Request, Post, UseGuards } from '@nestjs/common';
+import { Controller, Request, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { Token } from '@core/auth/token.decorator';
-import { SupabaseJwtAuthGuard } from '@core/supabase/guard/supabase-jwt-auth.guard';
-import { SupabaseAuthGuard } from '@core/supabase/guard/supabase-auth.guard';
+import { UserService } from '@user/user.service';
+import { ShopService } from '@shop/shop.service';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly userService: UserService,
+    private readonly shopService: ShopService,
+    private readonly authService: AuthService,
+  ) {}
 
   @Post('session/user')
   async sessionUser(@Request() req) {

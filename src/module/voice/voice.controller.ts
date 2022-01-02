@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { VoiceService } from './voice.service';
 import { Prisma, Voice } from '@prisma/client';
+import { VoiceService } from '@voice/voice.service';
 
 @Controller('voice')
 export class VoiceController {

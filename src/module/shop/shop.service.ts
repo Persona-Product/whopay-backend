@@ -14,12 +14,6 @@ export class ShopService {
     });
   }
 
-  async createShop(data: Prisma.ShopCreateInput): Promise<Shop> {
-    return await this.prisma.shop.create({
-      data,
-    });
-  }
-
   async updateShop(
     id: Shop['id'],
     data: Prisma.ShopUpdateInput,

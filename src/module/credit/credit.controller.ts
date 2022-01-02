@@ -7,8 +7,8 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { CreditService } from './credit.service';
 import { Credit } from '@prisma/client';
+import { CreditService } from '@credit/credit.service';
 
 @Controller('credit')
 export class CreditController {
