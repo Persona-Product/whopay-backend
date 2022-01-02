@@ -7,8 +7,8 @@ import { Shop, Prisma, User } from '@prisma/client';
 @Injectable()
 export class AuthService {
   constructor(
-    private supabaseService: SupabaseService,
     private prisma: PrismaService,
+    private supabaseService: SupabaseService,
   ) {}
 
   async sessionShop(token: Shop['token']): Promise<Shop | null> {
