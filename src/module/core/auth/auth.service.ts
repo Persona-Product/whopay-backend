@@ -31,7 +31,25 @@ export class AuthService {
     return user;
   }
 
-  async signup(phone: string, password: string): Promise<Session | null> {
+  async signupEmail(email: string, password: string): Promise<Session | null> {
+    const { session, error } = await this.supabaseService.client.auth.signUp({
+      email,
+      password,
+    });
+    if (error) throw new Error(error.message);
+    return session;
+  }
+
+  async signinEmail(email: string, password: string): Promise<Session | null> {
+    const { session, error } = await this.supabaseService.client.auth.signIn({
+      email,
+      password,
+    });
+    if (error) throw new Error(error.message);
+    return session;
+  }
+
+  async signupPhone(phone: string, password: string): Promise<Session | null> {
     const { session, error } = await this.supabaseService.client.auth.signUp({
       phone,
       password,

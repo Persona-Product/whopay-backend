@@ -19,10 +19,24 @@ export class AuthController {
     return result;
   }
 
-  @Post('signup')
-  async signup(@Request() req) {
+  @Post('signup/email')
+  async signupEmail(@Request() req) {
+    const { email, password } = req.body;
+    const result = await this.authService.signupEmail(email, password);
+    return result;
+  }
+
+  @Post('signin/email')
+  async signinEmail(@Request() req) {
+    const { email, password } = req.body;
+    const result = await this.authService.signinEmail(email, password);
+    return result;
+  }
+
+  @Post('signup/phone')
+  async signupPhone(@Request() req) {
     const { phone, password } = req.body;
-    const result = await this.authService.signup(phone, password);
+    const result = await this.authService.signupPhone(phone, password);
     return result;
   }
 
