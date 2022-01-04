@@ -19,17 +19,17 @@ export class SupabaseStrategy extends PassportStrategy(
     });
   }
 
-  validate(payload: any): Promise<any> {
-    super.validate(payload);
-    const session = this.authService.signinUser(
-      payload.username,
-      payload.password,
-    );
-    if (!session) {
-      throw new UnauthorizedException();
-    }
-    return session;
-  }
+  // validate(payload: any): Promise<any> {
+  //   super.validate(payload);
+  //   const session = this.authService.signinUser(
+  //     payload.username,
+  //     payload.password,
+  //   );
+  //   if (!session) {
+  //     throw new UnauthorizedException();
+  //   }
+  //   return session;
+  // }
 
   // authenticate(req) {
   //   super.authenticate(req);
