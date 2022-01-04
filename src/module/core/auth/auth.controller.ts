@@ -26,13 +26,6 @@ export class AuthController {
     return result;
   }
 
-  @Post('signin/email')
-  async signinEmail(@Request() req) {
-    const { email, password } = req.body;
-    const result = await this.authService.signinEmail(email, password);
-    return result;
-  }
-
   @Post('signup/phone')
   async signupPhone(@Request() req) {
     const { phone, password } = req.body;
@@ -64,8 +57,12 @@ export class AuthController {
   // @UseGuards(SupabaseAuthGuard)
   @Post('signin/user')
   async signinUser(@Request() req) {
-    const { phone, password } = req.body;
-    const result = await this.authService.signinUser(phone, password);
+    const { phoneOrEmail, password, key } = req.body;
+    const result = await this.authService.signinUser(
+      phoneOrEmail,
+      password,
+      key,
+    );
     return result;
   }
 

@@ -40,15 +40,6 @@ export class AuthService {
     return session;
   }
 
-  async signinEmail(email: string, password: string): Promise<Session | null> {
-    const { session, error } = await this.supabaseService.client.auth.signIn({
-      email,
-      password,
-    });
-    if (error) throw new Error(error.message);
-    return session;
-  }
-
   async signupPhone(phone: string, password: string): Promise<Session | null> {
     const { session, error } = await this.supabaseService.client.auth.signUp({
       phone,
@@ -86,9 +77,13 @@ export class AuthService {
     });
   }
 
-  async signinUser(phone: string, password: string): Promise<User | null> {
+  async signinUser(
+    phoneOrEmail: string,
+    password: string,
+    key: 'email' | 'phone',
+  ): Promise<User | null> {
     const { session, error } = await this.supabaseService.client.auth.signIn({
-      phone,
+      [key]: phoneOrEmail,
       password,
     });
     if (error) throw new Error(error.message);
