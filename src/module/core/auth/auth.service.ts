@@ -98,9 +98,13 @@ export class AuthService {
     return user;
   }
 
-  async signinShop(phone: string, password: string): Promise<Shop | null> {
+  async signinShop(
+    phoneOrEmail: string,
+    password: string,
+    key: 'email' | 'phone',
+  ): Promise<Shop | null> {
     const { session, error } = await this.supabaseService.client.auth.signIn({
-      phone,
+      [key]: phoneOrEmail,
       password,
     });
     if (error) throw new Error(error.message);

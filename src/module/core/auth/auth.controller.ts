@@ -69,8 +69,12 @@ export class AuthController {
   // @UseGuards(SupabaseAuthGuard)
   @Post('signin/shop')
   async signinShop(@Request() req) {
-    const { phone, password } = req.body;
-    const result = await this.authService.signinShop(phone, password);
+    const { phoneOrEmail, password, key } = req.body;
+    const result = await this.authService.signinShop(
+      phoneOrEmail,
+      password,
+      key,
+    );
     return result;
   }
 
