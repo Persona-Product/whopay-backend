@@ -4,7 +4,7 @@ import { PaymentService } from '@payment/payment.service';
 type PayBody = {
   shopId: string;
   passcode: string;
-  price: string;
+  amount: number;
   voiceFile: string;
 };
 

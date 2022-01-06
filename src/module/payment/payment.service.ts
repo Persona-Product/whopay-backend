@@ -6,7 +6,7 @@ import { SupabaseService } from '@core/supabase/supabase.service';
 type PayBody = {
   shopId: string;
   passcode: string;
-  price: string;
+  amount: number;
   voiceFile: string;
 };
 
@@ -33,7 +33,7 @@ export class PaymentService {
   async paymentTransaction(data: PayBody): Promise<{ result: boolean }> {
     // 1. 音声ファイルをAI実行ファイルに転送
     const pyshell = new PythonShell('who/index.py');
-    await pyshell.send(data.price);
+    await pyshell.send(data.amount);
 
     // 2. AIファイルを実行
     const { success, resultUid } = await new Promise((resolve, reject) => {
@@ -90,6 +90,7 @@ export class PaymentService {
     // 9. 支払い処理が完了したらPaymentテーブルに登録
     const payment = await this.prisma.payment.create({
       data: {
+        amount: Number(data.amount),
         User: { connect: { id: resultUid } },
         Shop: { connect: { id: data.shopId } },
         Voice: { connect: { id: voice.id } },
