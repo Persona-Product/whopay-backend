@@ -59,6 +59,7 @@ model Payment {
   userId    String
   shopId    String
   voiceId   Int
+  amount    Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   Shop      Shop     @relation(fields: [shopId], references: [id])
