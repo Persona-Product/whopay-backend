@@ -13,14 +13,14 @@ members = ['miya','isomura','yasui','kawahara','koide']
 # 音声ファイルの読み込み
 amount = int(sys.stdin.readline())
 
-if amount == 500:
-  voice = 'who/miya.wav'
-elif amount > 20000:
-  voice = 'who/koide.wav'
-elif amount > 10000:
-  voice = 'who/kawahara.wav'
-elif amount > 500:
+if amount > 3000:
   voice = 'who/yasui.wav'
+elif amount > 2000:
+  voice = 'who/koide.wav'
+elif amount > 1000:
+  voice = 'who/kawahara.wav'
+elif amount > 0:
+  voice = 'who/miya.wav'
 # else:
 #   voice = 'who/miya.wav' 
 
@@ -54,13 +54,13 @@ predicted = np.argmax(np.bincount(result))
 
 
 if predicted == 0:
-  result = '3bcbb6e8-5b7b-4648-99fe-625239a4408c'
+  result = '6ed02198-c085-420a-8e2e-347994bf372a'
 elif predicted == 2:
   result = 'ce791ba3-bafb-4907-8490-95f5ed1d7ddc'
 elif predicted == 3:
   result = '756d0f5c-b23b-45ec-884d-2a31db83670e'
 elif predicted == 4:
-  result = '657a405e-3170-435b-a5e4-0b28c7e9311f'
+  result = 'd2851b02-e66f-4b95-95f5-be128757af41'
 else: 
   result = 'not matching'
 
